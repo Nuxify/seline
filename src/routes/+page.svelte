@@ -3,14 +3,14 @@
 	import { SEO } from '$components';
 </script>
 
-<h1 class="text-primary text-xl">Svelte Template: Seline</h1>
+<h1 class="text-xl text-primary">Svelte Template: Seline</h1>
 
 <Button size="sm" color="red" class="mt-3 px-5">Submit</Button>
 <Alert
 	dismissable
-	class="fixed bottom-0 left-1/2 w-[99%] -translate-x-1/2 mb-2 bg-primary text-white"
+	class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary text-white"
 >
-	Submitted content successfully!
+	<span class="font-semibold">Submitted content successfully!</span>
 </Alert>
 
 <SEO
