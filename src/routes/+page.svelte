@@ -8,7 +8,7 @@
 <Button size="sm" color="red" class="mt-3 px-5">Submit</Button>
 <Alert
 	dismissable
-	class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary text-white"
+	class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary py-3 text-white"
 >
 	<span class="font-semibold">Submitted content successfully!</span>
 </Alert>
