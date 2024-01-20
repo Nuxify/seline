@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { Alert, Button, Card } from 'flowbite-svelte';
+	import { Alert, Button, Input } from 'flowbite-svelte';
 	import { SEO } from '$components';
-</script>
 
 	export let data;
 </script>
 
-<!-- <Button size="sm" color="red" class="mt-3 px-5">Submit</Button>
-<Alert
+<!-- <Button size="sm" color="red" class="mt-3 px-5">Submit</Button> -->
+<!-- <Alert
 	dismissable
 	class="fixed bottom-0 left-1/2 mb-2 w-[99%] -translate-x-1/2 bg-primary text-white"
 >
@@ -19,9 +18,19 @@
 		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
 		<div class="w-3/4">
 			<h1 class="text-xl text-primary">Create a post</h1>
+			<div class="flex flex-col items-center md:flex-row">
+				<Input
+					type="email"
+					placeholder="Enter comment"
+					class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent md:w-64"
+				/>
+				<Button class="btn--primary mt-3 w-full rounded-full md:ml-[-30px] md:mt-0 md:w-auto">
+					<span class="lato--font-regular text-white"> Post </span>
+				</Button>
+			</div>
 		</div>
 		{#each data.posts as item}
-			<div class="mb-7rounded-xl mx-auto w-3/4 border border-primary p-5">
+			<div class="mb-7rounded-xl mx-auto w-3/4 border border-primary p-5 rounded-lg my-2">
 				<h6>ID: {item.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
 					{item.title}
