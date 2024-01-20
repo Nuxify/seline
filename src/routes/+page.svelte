@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Alert, Button, Card } from 'flowbite-svelte';
+	import { SEO } from '$components';
+</script>
 
 	export let data;
 </script>
@@ -30,3 +32,10 @@
 		{/each}
 	</div>
 </section>
+
+<SEO
+	title="Seline - Svelekit Template"
+	description="Get started with seline using sveltekit and tailwind"
+	type="WebSite"
+	url="https://nux.nuxify.tech"
+/>
