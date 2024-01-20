@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Alert, Button } from 'flowbite-svelte';
+	import { SEO } from '$components';
 </script>
 
 <h1 class="text-primary text-xl">Svelte Template: Seline</h1>
@@ -11,3 +12,10 @@
 >
 	Submitted content successfully!
 </Alert>
+
+<SEO
+	title="Seline - Svelekit Template"
+	description="Get started with seline using sveltekit and tailwind"
+	type="WebSite"
+	url="https://nux.nuxify.tech"
+/>
