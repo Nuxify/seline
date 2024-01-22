@@ -1,6 +1,6 @@
 export const prerender = true;
 import type { PageLoad } from './$types';
-import selectedPostId from '../../stores/comments';
+import selectedPostId from '$stores/comments';
 
 export let load: PageLoad = async ({ fetch }) => {
 	let postId;

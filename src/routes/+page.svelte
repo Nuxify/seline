@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Alert, Button, Input } from 'flowbite-svelte';
 	import { SEO } from '$components';
-	import selectedPostId from '../stores/comments';
+	import selectedPostId from '$stores/comments';
 	import { goto } from '$app/navigation';
 
 	export let data;
