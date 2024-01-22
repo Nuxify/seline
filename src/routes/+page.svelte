@@ -1,12 +1,24 @@
 <script lang="ts">
 	import { Alert, Button, Input } from 'flowbite-svelte';
 	import { SEO } from '$components';
+	import selectedPostId from '../stores/comments';
+	import { goto } from '$app/navigation';
 
 	export let data;
 	let title: string;
 	let body: string;
 	let isLoading: boolean = false;
 	let isShowAlert: boolean = false;
+
+	/**
+	 * View post comments
+	 * @param id
+	 */
+	function viewComments(id: number): void {
+		selectedPostId.set(id);
+
+		goto(`/post`);
+	}
 
 	/**
 	 * Create a post
@@ -45,7 +57,7 @@
 		dismissable
 		class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary text-white"
 	>
-		Submitted content successfully!
+		Created a post successfully!
 	</Alert>
 {/if}
 
@@ -85,7 +97,14 @@
 					{item.title}
 				</h5>
 				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{item.body}</p>
-				<Button class="ml-auto mt-5 flex bg-primary focus:ring-0">View Comments</Button>
+				<Button
+					class="ml-auto mt-5 flex bg-primary focus:ring-0"
+					on:click={() => {
+						viewComments(item.id);
+					}}
+				>
+					View Comments
+				</Button>
 			</div>
 		{/each}
 	</div>
