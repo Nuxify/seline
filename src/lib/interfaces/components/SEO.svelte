@@ -1,13 +1,13 @@
 <script lang="ts">
-	export let title: string = '';
-	export let description: string = '';
-	export let type: string = '';
-	export let url: string = '';
+	export let title: string = ''
+	export let description: string = ''
+	export let type: string = ''
+	export let url: string = ''
 
-	$: pageTitle = title;
-	$: pageDescription = description;
-	$: pageType = type;
-	$: pageUrl = url;
+	$: pageTitle = title
+	$: pageDescription = description
+	$: pageType = type
+	$: pageUrl = url
 </script>
 
 <svelte:head>
