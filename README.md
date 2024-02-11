@@ -2,6 +2,8 @@
 
 SvelteKit template for building modern and blazing fast webapps. Flowbite/Tailwind included.
 
+> Demo: https://seline.pages.dev/
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
