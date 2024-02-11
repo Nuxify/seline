@@ -33,6 +33,13 @@ export class SocialRepository implements ISocialRepository {
 	// 		})
 	// }
 
+	/**
+	 * Create a post
+	 *
+	 * @param   {CreatePostRequest<CreatePostResponse>}  request
+	 *
+	 * @return  {Promise<CreatePostResponse>}
+	 */
 	public async CreatePost(request: CreatePostRequest): Promise<CreatePostResponse> {
 		return this.$axios
 			.post('/posts', request)
