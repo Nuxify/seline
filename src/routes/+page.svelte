@@ -13,7 +13,6 @@
 
 	onMount(async () => {
 		// watchers or subscribers should be here
-		// below is an example to print the get posts response message when call is success
 		socialAPIStore.subscribe((state) => {
 			if (state.CreatePostState.SUCCESS || state.CreatePostState.FAILED) {
 				if (state.CreatePostState.SUCCESS) {
