@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store'
-import type { WritableDTO, LsKeys } from './localstorage.dto'
+import type { StateDTO, LsKeys } from './localstorage.dto'
 import { LocalStorageRepository } from '$lib/infrastructures/repository/localstorage.repository'
 
-const state: WritableDTO = {
+const state: StateDTO = {
 	lastKnownKey: '',
 	lastKnownValue: ''
 }

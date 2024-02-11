@@ -1,4 +1,4 @@
-export interface WritableDTO {
+export interface StateDTO {
 	selectedPost: Post
 }
 

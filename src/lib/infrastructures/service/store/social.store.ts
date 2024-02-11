@@ -3,7 +3,7 @@ import { writable } from 'svelte/store'
 import { SocialRepository } from '$lib/infrastructures/repository/social.repository'
 import { AxiosConfig } from '$lib/configs/axios'
 import type {
-	WritableDTO,
+	StateDTO,
 	CreatePostRequest,
 	CommentResponse,
 	PostResponse,
@@ -15,7 +15,7 @@ import type { ErrorAPIResponse } from '$lib/infrastructures/models/dto'
 const $axios = axios.create(AxiosConfig)
 const ISocialRepository = new SocialRepository($axios)
 
-const state: WritableDTO = {
+const state: StateDTO = {
 	/// state
 	CreatePostState: {
 		LOADING: false,

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
-import type { WritableDTO } from './global.dto'
+import type { StateDTO } from './global.dto'
 
-const state: WritableDTO = {
+const state: StateDTO = {
 	alertMessage: '',
 	showAlert: false
 }

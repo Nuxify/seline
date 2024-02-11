@@ -1,4 +1,4 @@
-export interface WritableDTO {
+export interface StateDTO {
 	lastKnownKey: string
 	lastKnownValue: string
 }
