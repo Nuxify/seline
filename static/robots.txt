@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /fonts/
 Allow: /
 
-Sitemap: https://seline.com/sitemap.xml
+Sitemap: https://nuxify.tech/sitemap.xml
