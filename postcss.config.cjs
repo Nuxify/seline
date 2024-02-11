@@ -1,5 +1,5 @@
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
+const tailwindcss = require('tailwindcss')
+const autoprefixer = require('autoprefixer')
 
 /** @type {import('postcss-load-config').Config} */
 const config = {
@@ -9,6 +9,6 @@ const config = {
 		//But others, like autoprefixer, need to run after,
 		autoprefixer
 	]
-};
+}
 
-module.exports = config;
+module.exports = config

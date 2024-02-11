@@ -19,6 +19,21 @@ module.exports = {
 		es2017: true,
 		node: true
 	},
+	rules: {
+		semi: 0,
+		'@typescript-eslint/no-unused-vars': [
+			'error',
+			{
+				vars: 'all',
+				args: 'after-used',
+				ignoreRestSiblings: false
+			}
+		],
+		'@typescript-eslint/member-delimiter-style': 0,
+		'@typescript-eslint/ban-ts-comment': 'error',
+		'@typescript-eslint/explicit-function-return-type': 'off', // disable default
+		'@typescript-eslint/no-explicit-any': 'error'
+	},
 	overrides: [
 		{
 			files: ['*.svelte'],
@@ -28,4 +43,4 @@ module.exports = {
 			}
 		}
 	]
-};
+}

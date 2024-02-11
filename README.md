@@ -7,6 +7,9 @@ SvelteKit template for building modern and blazing fast webapps. Flowbite/Tailwi
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
+# sync svelte with tsconfig
+npm run check
+
 npm run dev
 
 # or start the server and open the app in a new browser tab
