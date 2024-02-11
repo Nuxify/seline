@@ -32,19 +32,6 @@
 	})
 
 	/**
-	 * View post comments
-	 * @param pageId
-	 */
-	function viewComments(post: Post): void {
-		homeStore.update((state) => {
-			state.selectedPost = post
-			return state
-		})
-
-		goto(`/post`)
-	}
-
-	/**
 	 * Create a post
 	 */
 	async function createPost(): Promise<void> {
@@ -72,6 +59,19 @@
 		// reset
 		title = ''
 		body = ''
+	}
+
+	/**
+	 * View post comments
+	 * @param pageId
+	 */
+	function viewComments(post: Post): void {
+		homeStore.update((state) => {
+			state.selectedPost = post
+			return state
+		})
+
+		goto(`/post`)
 	}
 </script>
 
