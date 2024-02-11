@@ -23,7 +23,7 @@
 	<meta property="og:locale" content="en" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="/images/cover-image.png" />
-	<meta property="og:image:alt" content="Seline Chain Cover Logo" />
+	<meta property="og:image:alt" content="Seline Cover Logo" />
 
 	{@html `<script type="application/ld+json">{
         "@context": "http://schema.org",
