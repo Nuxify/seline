@@ -1,15 +1,12 @@
 import { writable } from 'svelte/store'
+import { ILocalStorageRepository } from './servicecontainer'
 import type { StateDTO, LsKeys } from './localstorage.dto'
-import { LocalStorageRepository } from '$lib/infrastructures/repository/localstorage.repository'
 
 const state: StateDTO = {
 	lastKnownKey: '',
 	lastKnownValue: ''
 }
 const { subscribe, update } = writable(state)
-
-/// dependency injection
-const ILocalStorageRepository = new LocalStorageRepository()
 
 export const localStorageStore = {
 	subscribe,

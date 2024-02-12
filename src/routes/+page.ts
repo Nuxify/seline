@@ -1,11 +1,7 @@
-import type { PageLoad } from './$types'
 import { socialAPIStore } from '$lib/infrastructures/service/store/social.store'
+import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {
-	try {
-		// get all posts
-		socialAPIStore.GetPosts()
-	} catch (error) {
-		console.error(error)
-	}
+	// get all posts
+	socialAPIStore.GetPosts()
 }

@@ -49,4 +49,4 @@
 	</div>
 </section>
 
-<SEO title={$homeStore.selectedPost.title} type="WebSite" url="https://nuxify.tech" />
+<SEO title={$homeStore.selectedPost.title} type="WebSite" url="https://seline.pages.dev" />

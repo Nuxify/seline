@@ -1,7 +1,6 @@
-import axios from 'axios'
 import { writable } from 'svelte/store'
-import { SocialRepository } from '$lib/infrastructures/repository/social.repository'
-import { AxiosConfig } from '$lib/configs/axios'
+import type { ErrorAPIResponse } from '$lib/infrastructures/models/dto'
+import { ISocialRepository } from './servicecontainer'
 import type {
 	StateDTO,
 	CreatePostRequest,
@@ -9,11 +8,6 @@ import type {
 	PostResponse,
 	CreatePostResponse
 } from './social.dto'
-import type { ErrorAPIResponse } from '$lib/infrastructures/models/dto'
-
-/// dependency injection
-const $axios = axios.create(AxiosConfig)
-const ISocialRepository = new SocialRepository($axios)
 
 const state: StateDTO = {
 	/// state
@@ -93,7 +87,7 @@ export const socialAPIStore = {
 				store.CreatePostState.SUCCESS = false
 				store.CreatePostState.FAILED = true
 				store.CreatePostResponse = {
-					message: err.message, // FIXME: this should be assigned from API response
+					message: 'Error occurred while creating post.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: {} as CreatePostResponse
 				}
@@ -153,7 +147,7 @@ export const socialAPIStore = {
 				store.GetCommentsState.SUCCESS = false
 				store.GetCommentsState.FAILED = true
 				store.CommentsResponse = {
-					message: err.message, // FIXME: this should be assigned from API response
+					message: 'Error occurred while fetching comments.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
 				}
@@ -212,7 +206,7 @@ export const socialAPIStore = {
 				store.GetPostsState.SUCCESS = false
 				store.GetPostsState.FAILED = true
 				store.PostsResponse = {
-					message: err.message, // FIXME: this should be assigned from API response
+					message: 'Error occurred while fetching posts.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
 				}

@@ -140,5 +140,5 @@
 	title="Seline - SvelteKit Template"
 	description="SvelteKit template for building modern and blazing fast webapps. Flowbite/Tailwind included."
 	type="WebSite"
-	url="https://nuxify.tech"
+	url="https://seline.pages.dev"
 />

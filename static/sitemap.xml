@@ -6,7 +6,7 @@
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
     xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
-        <loc>https://nuxify.tech/</loc>
+        <loc>https://seline.pages.dev/</loc>
         <changefreq>weekly</changefreq>
         <lastmod>2023-01-20T05:25:16+00:00</lastmod>
         <priority>1.00</priority>
