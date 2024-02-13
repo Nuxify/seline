@@ -4,7 +4,7 @@ import type {
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from '$lib/infrastructures/models/social.dto'
+} from '$lib/domain/models/social.dto'
 
 export interface ISocialRepository {
 	CreatePost(request: CreatePostRequest): Promise<CreatePostResponse>

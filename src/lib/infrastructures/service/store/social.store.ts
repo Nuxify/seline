@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import type { ErrorAPIResponse } from '$lib/infrastructures/models/dto'
+import type { ErrorAPIResponse } from '$lib/domain/models/dto'
 import { ISocialRepository } from './servicecontainer'
 import type {
 	StateDTO,
