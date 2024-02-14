@@ -2,7 +2,11 @@
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { Alert, Button, Input } from 'flowbite-svelte'
-	import { socialAPIStore } from '$lib/infrastructures/service/store/social.store'
+	import {
+		socialAPI,
+		createPostStore,
+		getPostsStore
+	} from '$lib/infrastructures/service/store/social.store'
 	import { globalStore } from '$lib/infrastructures/service/store/global.store'
 	import { homeStore } from '$lib/module/home/service/store/home.store'
 	import type { Post } from '$lib/module/home/service/store/home.dto'
@@ -13,20 +17,22 @@
 
 	onMount(async () => {
 		// watchers or subscribers should be here
-		socialAPIStore.subscribe((state) => {
-			if (state.CreatePostState.SUCCESS || state.CreatePostState.FAILED) {
-				if (state.CreatePostState.SUCCESS) {
-					console.log('New post id:', state.CreatePostResponse.data.id)
+		socialAPI.createPostStore.subscribe((state) => {
+			if (state.State.SUCCESS || state.State.FAILED) {
+				if (state.State.SUCCESS) {
+					console.log('New post id:', state.Response.data.id)
 				}
 
 				globalStore.update((globalState) => {
-					globalState.alertMessage = state.CreatePostResponse.message
+					globalState.alertMessage = state.Response.message
 					return globalState
 				})
 			}
+		})
 
-			if (state.GetPostsState.SUCCESS || state.GetPostsState.FAILED) {
-				console.log(state.PostsResponse.message)
+		socialAPI.getPostsStore.subscribe((state) => {
+			if (state.State.SUCCESS || state.State.FAILED) {
+				console.log(state.Response.message)
 			}
 		})
 	})
@@ -36,7 +42,7 @@
 	 */
 	async function createPost(): Promise<void> {
 		try {
-			await socialAPIStore.CreatePost({
+			await socialAPI.createPostStore.CreatePost({
 				title,
 				body
 			})
@@ -105,7 +111,7 @@
 				/>
 				<Button
 					class="btn--primary ml-5 w-[100px] rounded-full"
-					disabled={$socialAPIStore.CreatePostState.LOADING}
+					disabled={$createPostStore.State.LOADING}
 					on:click={() => {
 						createPost()
 					}}
@@ -116,7 +122,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each $socialAPIStore.PostsResponse.data as post}
+		{#each $getPostsStore.Response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

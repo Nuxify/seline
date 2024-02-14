@@ -1,35 +1,13 @@
-export interface StateDTO {
-	/// state
-	CreatePostState: {
+export interface StateDTO<T> {
+	State: {
 		LOADING: boolean
 		SUCCESS: boolean
 		FAILED: boolean
 	}
-	GetCommentsState: {
-		LOADING: boolean
-		SUCCESS: boolean
-		FAILED: boolean
-	}
-	GetPostsState: {
-		LOADING: boolean
-		SUCCESS: boolean
-		FAILED: boolean
-	}
-	/// data
-	CreatePostResponse: {
+	Response: {
 		message: string
 		errorCode: string | null
-		data: CreatePostResponse
-	}
-	CommentsResponse: {
-		message: string
-		errorCode: string | null
-		data: CommentResponse[]
-	}
-	PostsResponse: {
-		message: string
-		errorCode: string | null
-		data: PostResponse[]
+		data: T
 	}
 }
 

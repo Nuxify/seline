@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { Button } from 'flowbite-svelte'
-	import { socialAPIStore } from '$lib/infrastructures/service/store/social.store'
+	import { socialAPI, getCommentsStore } from '$lib/infrastructures/service/store/social.store'
 	import { homeStore } from '$lib/module/home/service/store/home.store'
 	import { SEO } from '$components'
 
@@ -37,7 +37,7 @@
 		<h1 class="mt-10 text-center text-2xl text-primary">Comments</h1>
 
 		<!-- comments list -->
-		{#each $socialAPIStore.CommentsResponse.data as item}
+		{#each $getCommentsStore.Response.data as item}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>Name: {item.name}</h6>
 				<h5 class="mb-2 text-sm font-medium lowercase tracking-tight text-gray-500 dark:text-white">

@@ -4,55 +4,60 @@ import { ISocialRepository } from './servicecontainer'
 import type {
 	StateDTO,
 	CreatePostRequest,
+	CreatePostResponse,
 	CommentResponse,
-	PostResponse,
-	CreatePostResponse
+	PostResponse
 } from './social.dto'
 
-const state: StateDTO = {
-	/// state
-	CreatePostState: {
+const createPostState: StateDTO<CreatePostResponse> = {
+	State: {
 		LOADING: false,
 		SUCCESS: false,
 		FAILED: false
 	},
-	GetCommentsState: {
-		LOADING: false,
-		SUCCESS: false,
-		FAILED: false
-	},
-	GetPostsState: {
-		LOADING: false,
-		SUCCESS: false,
-		FAILED: false
-	},
-	/// data
-	CreatePostResponse: {
+	Response: {
 		message: '',
 		errorCode: null,
 		data: {} as CreatePostResponse
+	}
+}
+const getCommentsState: StateDTO<CommentResponse[]> = {
+	State: {
+		LOADING: false,
+		SUCCESS: false,
+		FAILED: false
 	},
-	CommentsResponse: {
+	Response: {
 		message: '',
 		errorCode: null,
 		data: [] as CommentResponse[]
+	}
+}
+const getPostsState: StateDTO<PostResponse[]> = {
+	State: {
+		LOADING: false,
+		SUCCESS: false,
+		FAILED: false
 	},
-	PostsResponse: {
+	Response: {
 		message: '',
 		errorCode: null,
 		data: [] as PostResponse[]
 	}
 }
-const { subscribe, update } = writable(state)
 
-export const socialAPIStore = {
-	subscribe,
+const createPostWritable = writable(createPostState)
+const getPostsWritable = writable(getPostsState)
+const getCommentsWritable = writable(getCommentsState)
+
+export const createPostStore = {
+	...createPostWritable,
 	async CreatePost(request: CreatePostRequest): Promise<void> {
 		// loading
-		update((store) => {
-			store.CreatePostState.LOADING = true
-			store.CreatePostState.SUCCESS = false
-			store.CreatePostState.FAILED = false
+		createPostWritable.update((store) => {
+			store.State.LOADING = true
+			store.State.SUCCESS = false
+			store.State.FAILED = false
 			return store
 		})
 
@@ -63,11 +68,11 @@ export const socialAPIStore = {
 			})
 
 			// success
-			update((store) => {
-				store.CreatePostState.LOADING = false
-				store.CreatePostState.SUCCESS = true
-				store.CreatePostState.FAILED = false
-				store.CreatePostResponse = {
+			createPostWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = true
+				store.State.FAILED = false
+				store.Response = {
 					message: 'Successfully created post.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: {
@@ -82,11 +87,11 @@ export const socialAPIStore = {
 			const err = error as ErrorAPIResponse
 
 			// failed
-			update((store) => {
-				store.CreatePostState.LOADING = false
-				store.CreatePostState.SUCCESS = false
-				store.CreatePostState.FAILED = true
-				store.CreatePostResponse = {
+			createPostWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = true
+				store.Response = {
 					message: 'Error occurred while creating post.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: {} as CreatePostResponse
@@ -95,20 +100,24 @@ export const socialAPIStore = {
 			})
 		} finally {
 			// reset
-			update((store) => {
-				store.CreatePostState.LOADING = false
-				store.CreatePostState.SUCCESS = false
-				store.CreatePostState.FAILED = false
+			createPostWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = false
 				return store
 			})
 		}
-	},
+	}
+}
+
+export const getCommentsStore = {
+	...getCommentsWritable,
 	async GetCommentsByPost(postId: number): Promise<void> {
 		// loading
-		update((store) => {
-			store.GetCommentsState.LOADING = true
-			store.GetCommentsState.SUCCESS = false
-			store.GetCommentsState.FAILED = false
+		getCommentsWritable.update((store) => {
+			store.State.LOADING = true
+			store.State.SUCCESS = false
+			store.State.FAILED = false
 			return store
 		})
 
@@ -127,11 +136,11 @@ export const socialAPIStore = {
 			})
 
 			// success
-			update((store) => {
-				store.GetCommentsState.LOADING = false
-				store.GetCommentsState.SUCCESS = true
-				store.GetCommentsState.FAILED = false
-				store.CommentsResponse = {
+			getCommentsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = true
+				store.State.FAILED = false
+				store.Response = {
 					message: 'Successfully fetched comments.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: comments
@@ -142,11 +151,11 @@ export const socialAPIStore = {
 			const err = error as ErrorAPIResponse
 
 			// failed
-			update((store) => {
-				store.GetCommentsState.LOADING = false
-				store.GetCommentsState.SUCCESS = false
-				store.GetCommentsState.FAILED = true
-				store.CommentsResponse = {
+			getCommentsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = true
+				store.Response = {
 					message: 'Error occurred while fetching comments.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
@@ -155,20 +164,24 @@ export const socialAPIStore = {
 			})
 		} finally {
 			// reset
-			update((store) => {
-				store.GetCommentsState.LOADING = false
-				store.GetCommentsState.SUCCESS = false
-				store.GetCommentsState.FAILED = false
+			getCommentsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = false
 				return store
 			})
 		}
-	},
+	}
+}
+
+export const getPostsStore = {
+	...getPostsWritable,
 	async GetPosts(): Promise<void> {
 		// loading
-		update((store) => {
-			store.GetPostsState.LOADING = true
-			store.GetPostsState.SUCCESS = false
-			store.GetPostsState.FAILED = false
+		getPostsWritable.update((store) => {
+			store.State.LOADING = true
+			store.State.SUCCESS = false
+			store.State.FAILED = false
 			return store
 		})
 
@@ -186,11 +199,11 @@ export const socialAPIStore = {
 			})
 
 			// success
-			update((store) => {
-				store.GetPostsState.LOADING = false
-				store.GetPostsState.SUCCESS = true
-				store.GetPostsState.FAILED = false
-				store.PostsResponse = {
+			getPostsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = true
+				store.State.FAILED = false
+				store.Response = {
 					message: 'Successfully fetched posts.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: posts
@@ -201,11 +214,11 @@ export const socialAPIStore = {
 			const err = error as ErrorAPIResponse
 
 			// failed
-			update((store) => {
-				store.GetPostsState.LOADING = false
-				store.GetPostsState.SUCCESS = false
-				store.GetPostsState.FAILED = true
-				store.PostsResponse = {
+			getPostsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = true
+				store.Response = {
 					message: 'Error occurred while fetching posts.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
@@ -214,12 +227,18 @@ export const socialAPIStore = {
 			})
 		} finally {
 			// reset
-			update((store) => {
-				store.GetPostsState.LOADING = false
-				store.GetPostsState.SUCCESS = false
-				store.GetPostsState.FAILED = false
+			getPostsWritable.update((store) => {
+				store.State.LOADING = false
+				store.State.SUCCESS = false
+				store.State.FAILED = false
 				return store
 			})
 		}
 	}
+}
+
+export const socialAPI = {
+	createPostStore,
+	getCommentsStore,
+	getPostsStore
 }
