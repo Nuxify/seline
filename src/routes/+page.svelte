@@ -6,10 +6,10 @@
 		socialAPI,
 		createPostStore,
 		getPostsStore
-	} from '$lib/infrastructures/service/store/social.api.store'
-	import { globalStore } from '$lib/infrastructures/service/store/global.store'
-	import { homeStore } from '$lib/module/home/service/store/home.store'
-	import type { Post } from '$lib/module/home/service/store/home.dto'
+	} from '$lib/application/service/store/social.api.store'
+	import { globalStore } from '$lib/application/service/store/global.store'
+	import { homeStore } from '$lib/module/home/application/service/store/home.store'
+	import type { Post } from '$lib/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
 	let title: string
