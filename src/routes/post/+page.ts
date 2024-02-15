@@ -1,4 +1,4 @@
-import { socialAPI } from '$lib/infrastructures/service/store/social.store'
+import { socialAPI } from '$lib/infrastructures/service/store/social.api.store'
 import { homeStore } from '$lib/module/home/service/store/home.store'
 import type { PageLoad } from './$types'
 

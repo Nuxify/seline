@@ -10,36 +10,36 @@ import type {
 } from './social.dto'
 
 const createPostState: StateDTO<CreatePostResponse> = {
-	State: {
+	state: {
 		LOADING: false,
 		SUCCESS: false,
 		FAILED: false
 	},
-	Response: {
+	response: {
 		message: '',
 		errorCode: null,
 		data: {} as CreatePostResponse
 	}
 }
 const getCommentsState: StateDTO<CommentResponse[]> = {
-	State: {
+	state: {
 		LOADING: false,
 		SUCCESS: false,
 		FAILED: false
 	},
-	Response: {
+	response: {
 		message: '',
 		errorCode: null,
 		data: [] as CommentResponse[]
 	}
 }
 const getPostsState: StateDTO<PostResponse[]> = {
-	State: {
+	state: {
 		LOADING: false,
 		SUCCESS: false,
 		FAILED: false
 	},
-	Response: {
+	response: {
 		message: '',
 		errorCode: null,
 		data: [] as PostResponse[]
@@ -55,9 +55,9 @@ export const createPostStore = {
 	async CreatePost(request: CreatePostRequest): Promise<void> {
 		// loading
 		createPostWritable.update((store) => {
-			store.State.LOADING = true
-			store.State.SUCCESS = false
-			store.State.FAILED = false
+			store.state.LOADING = true
+			store.state.SUCCESS = false
+			store.state.FAILED = false
 			return store
 		})
 
@@ -69,10 +69,10 @@ export const createPostStore = {
 
 			// success
 			createPostWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = true
-				store.State.FAILED = false
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = true
+				store.state.FAILED = false
+				store.response = {
 					message: 'Successfully created post.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: {
@@ -88,10 +88,10 @@ export const createPostStore = {
 
 			// failed
 			createPostWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = true
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = true
+				store.response = {
 					message: 'Error occurred while creating post.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: {} as CreatePostResponse
@@ -101,9 +101,9 @@ export const createPostStore = {
 		} finally {
 			// reset
 			createPostWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = false
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = false
 				return store
 			})
 		}
@@ -115,9 +115,9 @@ export const getCommentsStore = {
 	async GetCommentsByPost(postId: number): Promise<void> {
 		// loading
 		getCommentsWritable.update((store) => {
-			store.State.LOADING = true
-			store.State.SUCCESS = false
-			store.State.FAILED = false
+			store.state.LOADING = true
+			store.state.SUCCESS = false
+			store.state.FAILED = false
 			return store
 		})
 
@@ -137,10 +137,10 @@ export const getCommentsStore = {
 
 			// success
 			getCommentsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = true
-				store.State.FAILED = false
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = true
+				store.state.FAILED = false
+				store.response = {
 					message: 'Successfully fetched comments.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: comments
@@ -152,10 +152,10 @@ export const getCommentsStore = {
 
 			// failed
 			getCommentsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = true
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = true
+				store.response = {
 					message: 'Error occurred while fetching comments.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
@@ -165,9 +165,9 @@ export const getCommentsStore = {
 		} finally {
 			// reset
 			getCommentsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = false
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = false
 				return store
 			})
 		}
@@ -179,9 +179,9 @@ export const getPostsStore = {
 	async GetPosts(): Promise<void> {
 		// loading
 		getPostsWritable.update((store) => {
-			store.State.LOADING = true
-			store.State.SUCCESS = false
-			store.State.FAILED = false
+			store.state.LOADING = true
+			store.state.SUCCESS = false
+			store.state.FAILED = false
 			return store
 		})
 
@@ -200,10 +200,10 @@ export const getPostsStore = {
 
 			// success
 			getPostsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = true
-				store.State.FAILED = false
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = true
+				store.state.FAILED = false
+				store.response = {
 					message: 'Successfully fetched posts.', // FIXME: this should be assigned from API response
 					errorCode: null,
 					data: posts
@@ -215,10 +215,10 @@ export const getPostsStore = {
 
 			// failed
 			getPostsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = true
-				store.Response = {
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = true
+				store.response = {
 					message: 'Error occurred while fetching posts.', // FIXME: this should be assigned from API response
 					errorCode: err.errorCode ?? null, // FIXME: this should be assigned from API response
 					data: []
@@ -228,9 +228,9 @@ export const getPostsStore = {
 		} finally {
 			// reset
 			getPostsWritable.update((store) => {
-				store.State.LOADING = false
-				store.State.SUCCESS = false
-				store.State.FAILED = false
+				store.state.LOADING = false
+				store.state.SUCCESS = false
+				store.state.FAILED = false
 				return store
 			})
 		}

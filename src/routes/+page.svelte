@@ -6,7 +6,7 @@
 		socialAPI,
 		createPostStore,
 		getPostsStore
-	} from '$lib/infrastructures/service/store/social.store'
+	} from '$lib/infrastructures/service/store/social.api.store'
 	import { globalStore } from '$lib/infrastructures/service/store/global.store'
 	import { homeStore } from '$lib/module/home/service/store/home.store'
 	import type { Post } from '$lib/module/home/service/store/home.dto'
@@ -17,22 +17,22 @@
 
 	onMount(async () => {
 		// watchers or subscribers should be here
-		socialAPI.createPostStore.subscribe((state) => {
-			if (state.State.SUCCESS || state.State.FAILED) {
-				if (state.State.SUCCESS) {
-					console.log('New post id:', state.Response.data.id)
+		socialAPI.createPostStore.subscribe((createPostState) => {
+			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
+				if (createPostState.state.SUCCESS) {
+					console.log('New post id:', createPostState.response.data.id)
 				}
 
 				globalStore.update((globalState) => {
-					globalState.alertMessage = state.Response.message
+					globalState.alertMessage = createPostState.response.message
 					return globalState
 				})
 			}
 		})
 
-		socialAPI.getPostsStore.subscribe((state) => {
-			if (state.State.SUCCESS || state.State.FAILED) {
-				console.log(state.Response.message)
+		socialAPI.getPostsStore.subscribe((getPostsState) => {
+			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
+				console.log(getPostsState.response.message)
 			}
 		})
 	})
@@ -111,7 +111,7 @@
 				/>
 				<Button
 					class="btn--primary ml-5 w-[100px] rounded-full"
-					disabled={$createPostStore.State.LOADING}
+					disabled={$createPostStore.state.LOADING}
 					on:click={() => {
 						createPost()
 					}}
@@ -122,7 +122,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each $getPostsStore.Response.data as post}
+		{#each $getPostsStore.response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

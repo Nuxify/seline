@@ -1,10 +1,10 @@
 export interface StateDTO<T> {
-	State: {
+	state: {
 		LOADING: boolean
 		SUCCESS: boolean
 		FAILED: boolean
 	}
-	Response: {
+	response: {
 		message: string
 		errorCode: string | null
 		data: T
