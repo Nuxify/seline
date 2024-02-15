@@ -7,7 +7,7 @@ import type {
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from './social.dto'
+} from './social.api.dto'
 
 const createPostState: StateDTO<CreatePostResponse> = {
 	state: {
