@@ -1,10 +1,4 @@
-export interface ILocalStorageRepository {
-	Clear(): void
-	GetItem(key: string): string | null
-	RemoveItem(key: string): void
-	SetItem(key: string, value: string): void
-}
-
+import type { ILocalStorageRepository } from '$lib/domain/repository/localstorage.repository'
 export class LocalStorageRepository implements ILocalStorageRepository {
 	/**
 	 * Clear local storage
