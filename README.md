@@ -8,10 +8,16 @@ SvelteKit template for building modern and blazing fast webapps. Flowbite/Tailwi
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
+> Migration! SvelteKit 4 requires node >=18.x to work
+
 ```bash
+# setup environment variables
+cp .env.example .env
+
 # sync svelte with tsconfig
 npm run check
 
+# run development mode
 npm run dev
 
 # or start the server and open the app in a new browser tab
