@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { Alert, Button, Input } from 'flowbite-svelte'
+	import { Button, Input } from 'flowbite-svelte'
 	import {
 		socialAPI,
 		createPostStore,
@@ -81,16 +81,6 @@
 	}
 </script>
 
-<!-- TODO: move to layout -->
-{#if $globalStore.showAlert}
-	<Alert
-		dismissable
-		class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary text-white"
-	>
-		{$globalStore.alertMessage}
-	</Alert>
-{/if}
-
 <section>
 	<div class="mx-auto mt-[30px] px-4 xl:container">
 		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
@@ -101,13 +91,13 @@
 					bind:value={title}
 					type="text"
 					placeholder="Enter title"
-					class="md:border--radius-l-full mr-5 w-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
+					class="md:border--radius-l-full mr-5 w-full rounded-full border-none bg-gray-100 !ring-transparent"
 				/>
 				<Input
 					bind:value={body}
 					type="text"
 					placeholder="Enter body"
-					class="md:border--radius-l-full w-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
+					class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
 				/>
 				<Button
 					class="btn--primary ml-5 w-[100px] rounded-full"
