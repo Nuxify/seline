@@ -9,10 +9,9 @@ const state: StateDTO = {
 		body: ''
 	}
 }
-const { subscribe, set, update } = writable(state)
+const { subscribe, update } = writable(state)
 
 export const homeStore = {
 	subscribe,
-	set,
 	update
 }

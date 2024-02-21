@@ -2,18 +2,19 @@ import { writable } from 'svelte/store'
 import type { AlertOptions, StateDTO } from './global.dto'
 
 const state: StateDTO = {
+	// alert
 	alertMessage: '',
 	alertVariant: '',
+	showAlert: false,
+	// drawer
 	drawerMiniVariant: false,
-	isShowDrawer: false,
-	showAlert: false
+	isShowDrawer: false
 }
 
-const { subscribe, set, update } = writable(state)
+const { subscribe, update } = writable(state)
 
 export const globalStore = {
 	subscribe,
-	set,
 	update,
 	ShowAlert(option: AlertOptions, timeout: number = 3000): void {
 		update((store) => {
