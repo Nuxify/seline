@@ -12,8 +12,7 @@ We encourage to follow the importing style guide below:
 <script lang="ts">
     import <svelte built-in packages>
     import <third-party packages>
-    import <api stores>
-    import <api stores dto>
+    import <api stores and api stores dto>
     import <stores and stores dto>
     import <global components and dto>
     import <components and dto>
