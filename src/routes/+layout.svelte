@@ -1,18 +1,8 @@
 <script>
-	import '../app.scss'
-	import '../app.postcss'
 	import { Alert } from 'flowbite-svelte'
 	import { globalStore } from '$lib/application/service/store/global.store'
-	import { Loading } from '$components'
-	import { onMount } from 'svelte'
-
-	let isPageRefreshedLoading = true
-
-	onMount(() => {
-		setTimeout(() => {
-			isPageRefreshedLoading = false
-		}, 1500)
-	})
+	import '../app.scss'
+	import '../app.postcss'
 </script>
 
 <!-- alert -->
@@ -23,10 +13,6 @@
 	>
 		{$globalStore.alertMessage}
 	</Alert>
-{/if}
-<!-- fullscreen loading -->
-{#if isPageRefreshedLoading}
-	<Loading />
 {/if}
 
 <slot />
