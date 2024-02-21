@@ -29,11 +29,11 @@ Example:
 
 ```ts
 <script lang="ts">
-	import { onMount } from 'svelte'
+    import { onMount } from 'svelte'
     import { sineIn } from 'svelte/easing'
 	import { MapLibre, Marker, Popup } from 'svelte-maplibre'
     import { ChevronLeftOutline, ChevronRightOutline, PlusSolid } from 'flowbite-svelte-icons'
-	import {
+    import {
         Button,
 		ButtonGroup,
 		Drawer,
@@ -48,13 +48,13 @@ Example:
 		getCheckpointsStore,
 		updateCheckpointStore
 	} from '$lib/application/service/store/checkpoint.api.store'
-	import type { CheckpointResponse } from '$lib/application/service/store/checkpoint.api.dto'
-	import { globalStore } from '$lib/application/service/store/global.store'
-	import { MessageStatus } from '$lib/application/service/store/global.dto'
-	import { uploadFileStore } from '$lib/application/service/store/media.api.store'
-	import { SEO } from '$components'
+    import type { CheckpointResponse } from '$lib/application/service/store/checkpoint.api.dto'
+    import { globalStore } from '$lib/application/service/store/global.store'
+    import { MessageStatus } from '$lib/application/service/store/global.dto'
+    import { uploadFileStore } from '$lib/application/service/store/media.api.store'
+    import { SEO } from '$components'
     import { locale, t } from '$lib/internal/translations'
-	import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '$lib/internal/utils'
+    import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '$lib/internal/utils'
 
     ...
 </script>
