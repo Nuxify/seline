@@ -82,7 +82,7 @@
 </script>
 
 <section>
-	<div class="mx-auto mt-[30px] px-4 xl:container">
+	<div class="mx-auto px-4 pt-[30px] xl:container">
 		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
 		<div class="mx-auto mb-7 mt-12 w-3/4">
 			<h1 class="text-xl text-primary">Create a post</h1>
