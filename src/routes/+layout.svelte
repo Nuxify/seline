@@ -9,7 +9,7 @@
 {#if $globalStore.showAlert}
 	<Alert
 		dismissable
-		class="fixed left-1/2 top-0 w-full -translate-x-1/2 rounded-none bg-primary text-white"
+		class="fixed left-1/2 top-0 z-[99999] w-full -translate-x-1/2 rounded-none text-white {$globalStore.alertVariant}"
 	>
 		{$globalStore.alertMessage}
 	</Alert>

@@ -15,7 +15,9 @@ const config = {
 			colors: {
 				primary: '#EE1F70',
 				accent: '#979797',
-				secondary: '#D89B4B'
+				secondary: '#D89B4B',
+				error: '#E92A4A',
+				success: '#6ED47C'
 			}
 		}
 	}

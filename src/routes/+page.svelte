@@ -11,6 +11,7 @@
 	import { homeStore } from '$lib/module/home/application/service/store/home.store'
 	import type { Post } from '$lib/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
+	import { MessageStatus } from '$lib/application/service/store/global.dto'
 
 	let title: string
 	let body: string
@@ -23,9 +24,10 @@
 					console.log('New post id:', createPostState.response.data.id)
 				}
 
-				globalStore.update((globalState) => {
-					globalState.alertMessage = createPostState.response.message
-					return globalState
+				// show alert prompt
+				globalStore.ShowAlert({
+					message: createPostState.response.message,
+					variant: createPostState.state.FAILED ? MessageStatus.ERROR : MessageStatus.SUCCESS
 				})
 			}
 		})
