@@ -49,4 +49,8 @@
 	</div>
 </section>
 
-<SEO title={$homeStore.selectedPost.title} type="WebSite" url="https://seline.pages.dev" />
+<SEO
+	title={$homeStore.selectedPost.title}
+	description={$homeStore.selectedPost.body}
+	url="https://seline.pages.dev/post/{$homeStore.selectedPost.id}"
+/>

@@ -1,12 +1,10 @@
 <script lang="ts">
 	export let title: string = ''
 	export let description: string = ''
-	export let type: string = ''
 	export let url: string = ''
 
 	$: pageTitle = title
 	$: pageDescription = description
-	$: pageType = type
 	$: pageUrl = url
 </script>
 
@@ -27,7 +25,7 @@
 
 	{@html `<script type="application/ld+json">{
         "@context": "http://schema.org",
-        "@type": "${pageType}",
+        "@type": "WebSite",
 		"url": "${pageUrl}",
 		"name": "${pageTitle}",
 		"description": "${pageDescription}"
