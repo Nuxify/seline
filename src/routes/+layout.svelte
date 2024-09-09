@@ -1,6 +1,6 @@
 <script>
 	import { Alert } from 'flowbite-svelte'
-	import { globalStore } from '$lib/application/service/store/global.store'
+	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import '../app.scss'
 	import '../app.postcss'
 </script>

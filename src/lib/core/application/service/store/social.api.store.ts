@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
-import type { ErrorAPIResponse } from '$lib/domain/models/dto'
-import { ISocialRepository } from './servicecontainer'
+import { SocialRepository } from '$lib/servicecontainer'
+import type { ErrorAPIResponse } from '$lib/core/domain/models/dto'
 import type {
 	StateDTO,
 	CreatePostRequest,
@@ -62,7 +62,7 @@ export const createPostStore = {
 		})
 
 		try {
-			const response = await ISocialRepository.CreatePost({
+			const response = await SocialRepository.CreatePost({
 				title: request.title,
 				body: request.body
 			})
@@ -122,7 +122,7 @@ export const getCommentsStore = {
 		})
 
 		try {
-			const response = await ISocialRepository.GetCommentsByPostId(postId)
+			const response = await SocialRepository.GetCommentsByPostId(postId)
 			const comments = response.map((item) => {
 				const comment: CommentResponse = {
 					id: item.id,
@@ -186,7 +186,7 @@ export const getPostsStore = {
 		})
 
 		try {
-			const response = await ISocialRepository.GetPosts()
+			const response = await SocialRepository.GetPosts()
 			const posts = response.map((item) => {
 				const post: PostResponse = {
 					id: item.id,

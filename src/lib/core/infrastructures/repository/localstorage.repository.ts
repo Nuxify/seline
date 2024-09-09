@@ -1,4 +1,4 @@
-import type { ILocalStorageRepository } from '$lib/domain/repository/localstorage.repository'
+import type { ILocalStorageRepository } from '$lib/core/domain/repository/localstorage.repository'
 export class LocalStorageRepository implements ILocalStorageRepository {
 	/**
 	 * Clear local storage
