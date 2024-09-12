@@ -28,7 +28,7 @@ const config = {
 			precompress: true
 		}),
 		alias: {
-			$components: 'src/lib/interfaces/components'
+			$components: 'src/lib/core/interfaces/components'
 		}
 	}
 }

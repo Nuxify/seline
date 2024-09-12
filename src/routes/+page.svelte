@@ -6,11 +6,11 @@
 		socialAPI,
 		createPostStore,
 		getPostsStore
-	} from '$lib/application/service/store/social.api.store'
-	import { globalStore } from '$lib/application/service/store/global.store'
-	import { MessageStatus } from '$lib/application/service/store/global.dto'
-	import { homeStore } from '$lib/module/home/application/service/store/home.store'
-	import type { Post } from '$lib/module/home/application/service/store/home.dto'
+	} from '$lib/core/application/service/store/social.api.store'
+	import { globalStore } from '$lib/core/application/service/store/global.store'
+	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
+	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
+	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
 	let title: string
@@ -137,6 +137,5 @@
 <SEO
 	title="Seline - SvelteKit Template"
 	description="SvelteKit template for building modern and blazing fast webapps. Flowbite/Tailwind included."
-	type="WebSite"
 	url="https://seline.pages.dev"
 />

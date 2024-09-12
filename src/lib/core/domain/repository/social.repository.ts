@@ -3,7 +3,7 @@ import type {
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from '$lib/domain/models/social.dto'
+} from '$lib/core/domain/models/social.dto'
 
 export interface ISocialRepository {
 	CreatePost(request: CreatePostRequest): Promise<CreatePostResponse>

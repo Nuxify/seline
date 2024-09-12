@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { Button } from 'flowbite-svelte'
-	import { getCommentsStore } from '$lib/application/service/store/social.api.store'
-	import { homeStore } from '$lib/module/home/application/service/store/home.store'
+	import { getCommentsStore } from '$lib/core/application/service/store/social.api.store'
+	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
 	import { SEO } from '$components'
 
 	/**
@@ -49,4 +49,8 @@
 	</div>
 </section>
 
-<SEO title={$homeStore.selectedPost.title} type="WebSite" url="https://seline.pages.dev" />
+<SEO
+	title={$homeStore.selectedPost.title}
+	description={$homeStore.selectedPost.body}
+	url="https://seline.pages.dev/post/{$homeStore.selectedPost.id}"
+/>

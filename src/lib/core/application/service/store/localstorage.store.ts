@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { ILocalStorageRepository } from './servicecontainer'
+import { LocalStorageRepository } from '$lib/servicecontainer'
 import type { StateDTO, LsKeys } from './localstorage.dto'
 
 const state: StateDTO = {
@@ -11,7 +11,7 @@ const { subscribe, update } = writable(state)
 export const localStorageStore = {
 	subscribe,
 	async Clear(): Promise<void> {
-		ILocalStorageRepository.Clear()
+		LocalStorageRepository.Clear()
 
 		update((store) => {
 			store.lastKnownKey = ''
@@ -20,10 +20,10 @@ export const localStorageStore = {
 		})
 	},
 	async GetItem(key: LsKeys): Promise<string | null> {
-		return ILocalStorageRepository.GetItem(key)
+		return LocalStorageRepository.GetItem(key)
 	},
 	async RemoveItem(key: LsKeys): Promise<void> {
-		ILocalStorageRepository.RemoveItem(key)
+		LocalStorageRepository.RemoveItem(key)
 
 		update((store) => {
 			store.lastKnownKey = key
@@ -32,7 +32,7 @@ export const localStorageStore = {
 		})
 	},
 	async SetItem(key: LsKeys, value: string): Promise<void> {
-		ILocalStorageRepository.SetItem(key, value)
+		LocalStorageRepository.SetItem(key, value)
 
 		update((store) => {
 			store.lastKnownKey = key
