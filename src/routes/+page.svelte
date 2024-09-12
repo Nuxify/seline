@@ -48,18 +48,6 @@
 				title,
 				body
 			})
-
-			// show alert prompt
-			globalStore.update((state) => {
-				state.showAlert = true
-				return state
-			})
-			setTimeout(() => {
-				globalStore.update((state) => {
-					state.showAlert = false
-					return state
-				})
-			}, 3000)
 		} catch (error) {
 			console.error(error)
 		}
