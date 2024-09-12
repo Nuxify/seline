@@ -67,6 +67,8 @@ export class SocialRepository implements ISocialRepository {
 	/**
 	 * Get comments by post id
 	 *
+	 * @param   {number}  postId
+	 *
 	 * @return  {Promise<CommentResponse[]>}
 	 */
 	public async GetCommentsByPostId(postId: number): Promise<CommentResponse[]> {
