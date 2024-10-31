@@ -12,6 +12,7 @@ export interface StateDTO<T> {
 }
 
 export interface CreatePostRequest {
+	userId: number
 	title: string
 	body: string
 }

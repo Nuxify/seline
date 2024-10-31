@@ -5,7 +5,7 @@
 	import {
 		socialAPI,
 		createPostStore,
-		getPostsStore
+		getAllPostsStore
 	} from '$lib/core/application/service/store/social.api.store'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
@@ -32,9 +32,9 @@
 			}
 		})
 
-		socialAPI.getPostsStore.subscribe((getPostsState) => {
-			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
-				console.log(getPostsState.response.message)
+		socialAPI.getAllPostsStore.subscribe((getAllPostsState) => {
+			if (getAllPostsState.state.SUCCESS || getAllPostsState.state.FAILED) {
+				console.log(getAllPostsState.response.message)
 			}
 		})
 	})
@@ -44,7 +44,8 @@
 	 */
 	async function createPost(): Promise<void> {
 		try {
-			await socialAPI.createPostStore.CreatePost({
+			await socialAPI.createPostStore.call({
+				userId: 1,
 				title,
 				body
 			})
@@ -102,7 +103,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each $getPostsStore.response.data as post}
+		{#each $getAllPostsStore.response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

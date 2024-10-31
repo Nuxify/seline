@@ -4,6 +4,6 @@ import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {
 	homeStore.subscribe((state) => {
-		socialAPI.getCommentsStore.GetCommentsByPost(state.selectedPost.id)
+		socialAPI.getPostCommentsStore.call(state.selectedPost.id)
 	})
 }

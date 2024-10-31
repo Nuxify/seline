@@ -1,3 +1,4 @@
+import type { APIResponse } from '../models/dto'
 import type {
 	CreatePostRequest,
 	CreatePostResponse,
@@ -6,7 +7,7 @@ import type {
 } from '$lib/core/domain/models/social.dto'
 
 export interface ISocialRepository {
-	CreatePost(request: CreatePostRequest): Promise<CreatePostResponse>
-	GetPosts(): Promise<PostResponse[]>
-	GetCommentsByPostId(postId: number): Promise<CommentResponse[]>
+	CreatePost(request: CreatePostRequest): Promise<APIResponse<CreatePostResponse>>
+	GetAllPosts(): Promise<APIResponse<PostResponse[]>>
+	GetPostComments(postId: number): Promise<APIResponse<CommentResponse[]>>
 }
