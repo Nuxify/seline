@@ -23,6 +23,8 @@
 		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
 			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
 				if (createPostState.state.SUCCESS) {
+					title = ''
+					body = ''
 					console.log('New post id:', createPostState.response.data.id)
 				}
 
@@ -51,19 +53,11 @@
 	 * Create a post
 	 */
 	async function createPost(): Promise<void> {
-		try {
-			await socialAPI.createPostStore.call({
-				userId: 1,
-				title,
-				body
-			})
-		} catch (error) {
-			console.error(error)
-		}
-
-		// reset
-		title = ''
-		body = ''
+		socialAPI.createPostStore.call({
+			userId: 1,
+			title,
+			body
+		})
 	}
 
 	/**
