@@ -52,5 +52,5 @@
 <SEO
 	title={$homeStore.selectedPost.title}
 	description={$homeStore.selectedPost.body}
-	url="https://seline.pages.dev/post/{$homeStore.selectedPost.id}"
+	url={`https://seline.pages.dev/post/${$homeStore.selectedPost.id}`}
 />
