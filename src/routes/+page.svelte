@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { Button, Input } from 'flowbite-svelte'
 	import {
@@ -16,9 +16,11 @@
 	let title: string
 	let body: string
 
+	const subscriptions: Array<() => void> = []
+
 	onMount(async () => {
 		// watchers or subscribers should be here
-		socialAPI.createPostStore.subscribe((createPostState) => {
+		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
 			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
 				if (createPostState.state.SUCCESS) {
 					console.log('New post id:', createPostState.response.data.id)
@@ -32,11 +34,17 @@
 			}
 		})
 
-		socialAPI.getAllPostsStore.subscribe((getAllPostsState) => {
+		const getAllPostsSubscription = socialAPI.getAllPostsStore.subscribe((getAllPostsState) => {
 			if (getAllPostsState.state.SUCCESS || getAllPostsState.state.FAILED) {
 				console.log(getAllPostsState.response.message)
 			}
 		})
+
+		subscriptions.push(createPostSubscription, getAllPostsSubscription)
+	})
+
+	onDestroy(() => {
+		subscriptions.forEach((unsubscribe) => unsubscribe())
 	})
 
 	/**
