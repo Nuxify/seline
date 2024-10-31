@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { ISocialRepository } from '$lib/servicecontainer'
+import { SocialRepository } from '$lib/servicecontainer'
 import type {
 	CreatePostResponse as ModelCreatePostResponse,
 	CommentResponse as ModelCommentResponse,
@@ -38,7 +38,7 @@ const getCommentsWritable = writable<StateDTO<CommentResponse[]>>({
 		data: [] as CommentResponse[]
 	}
 })
-const getAllPostsWritable = writable<StateDTO<PostResponse[]>>({
+const getPostsWritable = writable<StateDTO<PostResponse[]>>({
 	state: {
 		LOADING: false,
 		SUCCESS: false,
@@ -55,21 +55,21 @@ export const createPostStore = createAPIHandler<
 	CreatePostRequest,
 	ModelCreatePostResponse,
 	CreatePostResponse
->(createPostWritable, ISocialRepository.CreatePost.bind(ISocialRepository))
+>(createPostWritable, SocialRepository.CreatePost.bind(SocialRepository))
 
-export const getAllPostsStore = createAPIHandler<void, ModelPostResponse[], PostResponse[]>(
-	getAllPostsWritable,
-	ISocialRepository.GetAllPosts.bind(ISocialRepository)
+export const getPostsStore = createAPIHandler<void, ModelPostResponse[], PostResponse[]>(
+	getPostsWritable,
+	SocialRepository.GetPosts.bind(SocialRepository)
 )
 
 export const getPostCommentsStore = createAPIHandler<
 	number,
 	ModelCommentResponse[],
 	CommentResponse[]
->(getCommentsWritable, ISocialRepository.GetPostComments.bind(ISocialRepository))
+>(getCommentsWritable, SocialRepository.GetPostComments.bind(SocialRepository))
 
 export const socialAPI = {
 	createPostStore,
-	getAllPostsStore,
+	getPostsStore,
 	getPostCommentsStore
 }

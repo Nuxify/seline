@@ -5,7 +5,7 @@
 	import {
 		socialAPI,
 		createPostStore,
-		getAllPostsStore
+		getPostsStore
 	} from '$lib/core/application/service/store/social.api.store'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
@@ -36,13 +36,13 @@
 			}
 		})
 
-		const getAllPostsSubscription = socialAPI.getAllPostsStore.subscribe((getAllPostsState) => {
-			if (getAllPostsState.state.SUCCESS || getAllPostsState.state.FAILED) {
-				console.log(getAllPostsState.response.message)
+		const getPostsSubscription = socialAPI.getPostsStore.subscribe((getPostsState) => {
+			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
+				console.log(getPostsState.response.message)
 			}
 		})
 
-		subscriptions.push(createPostSubscription, getAllPostsSubscription)
+		subscriptions.push(createPostSubscription, getPostsSubscription)
 	})
 
 	onDestroy(() => {
@@ -105,7 +105,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each $getAllPostsStore.response.data as post}
+		{#each $getPostsStore.response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

@@ -40,7 +40,7 @@ export class SocialRepository implements ISocialRepository {
 	 *
 	 * @return  {Promise<APIResponse><PostResponse>[]}
 	 */
-	public async GetAllPosts(): Promise<APIResponse<PostResponse[]>> {
+	public async GetPosts(): Promise<APIResponse<PostResponse[]>> {
 		return this.$axios
 			.get('/v1/seline/post/list')
 			.then((response: AxiosResponse<APIResponse<PostResponse[]>>) => {
