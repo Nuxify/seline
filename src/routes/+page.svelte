@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { Button, Input } from 'flowbite-svelte'
 	import {
@@ -16,11 +16,15 @@
 	let title: string
 	let body: string
 
+	const subscriptions: Array<() => void> = []
+
 	onMount(async () => {
 		// watchers or subscribers should be here
-		socialAPI.createPostStore.subscribe((createPostState) => {
+		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
 			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
 				if (createPostState.state.SUCCESS) {
+					title = ''
+					body = ''
 					console.log('New post id:', createPostState.response.data.id)
 				}
 
@@ -32,29 +36,28 @@
 			}
 		})
 
-		socialAPI.getPostsStore.subscribe((getPostsState) => {
+		const getPostsSubscription = socialAPI.getPostsStore.subscribe((getPostsState) => {
 			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
 				console.log(getPostsState.response.message)
 			}
 		})
+
+		subscriptions.push(createPostSubscription, getPostsSubscription)
+	})
+
+	onDestroy(() => {
+		subscriptions.forEach((unsubscribe) => unsubscribe())
 	})
 
 	/**
 	 * Create a post
 	 */
 	async function createPost(): Promise<void> {
-		try {
-			await socialAPI.createPostStore.CreatePost({
-				title,
-				body
-			})
-		} catch (error) {
-			console.error(error)
-		}
-
-		// reset
-		title = ''
-		body = ''
+		socialAPI.createPostStore.call({
+			userId: 1,
+			title,
+			body
+		})
 	}
 
 	/**

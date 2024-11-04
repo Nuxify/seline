@@ -1,5 +1,6 @@
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios'
 import type { ISocialRepository } from '$lib/core/domain/repository/social.repository'
+import type { APIResponse, ErrorAPIResponse } from '$lib/core/domain/models/dto'
 import type {
 	CreatePostRequest,
 	CreatePostResponse,
@@ -14,72 +15,65 @@ export class SocialRepository implements ISocialRepository {
 		this.$axios = axios
 	}
 
-	// TODO: implementation example for responses with metadata structure
-	// public async GetPosts(): Promise<APIResponse<PostResponse[]>> {
-	// 	return this.$axios
-	// 		.get('/posts')
-	// 		.then((response: AxiosResponse<APIResponse<PostResponse[]>>) => {
-	// 			const { data } = response
-	// 			return data
-	// 		})
-	// 		.catch((error: AxiosError<ErrorAPIResponse>) => {
-	// 			const { response } = error
-	// 			throw response?.data !== undefined ? response.data : {}
-	// 		})
-	// }
-
 	/**
 	 * Create a post
 	 *
-	 * @param   {CreatePostRequest<CreatePostResponse>}  request
+	 * @param   {CreatePostRequest<APIResponse><CreatePostResponse>}  request
 	 *
-	 * @return  {Promise<CreatePostResponse>}
+	 * @return  {Promise<APIResponse><CreatePostResponse>}
 	 */
-	public async CreatePost(request: CreatePostRequest): Promise<CreatePostResponse> {
+	public async CreatePost(request: CreatePostRequest): Promise<APIResponse<CreatePostResponse>> {
 		return this.$axios
-			.post('/posts', request)
-			.then((response: AxiosResponse<CreatePostResponse>) => {
+			.post('/v1/seline/post/add', request)
+			.then((response: AxiosResponse<APIResponse<CreatePostResponse>>) => {
 				const { data } = response
 				return data
 			})
-			.catch((error: AxiosError) => {
-				throw error
+			.catch((error: AxiosError<ErrorAPIResponse>) => {
+				const { response } = error
+				throw response?.data !== undefined ? response.data : {}
 			})
 	}
 
 	/**
 	 * Get posts
 	 *
-	 * @return  {Promise<PostResponse[]>}
+	 * @return  {Promise<APIResponse><PostResponse>[]}
 	 */
-	public async GetPosts(): Promise<PostResponse[]> {
+	public async GetPosts(): Promise<APIResponse<PostResponse[]>> {
 		return this.$axios
-			.get('/posts')
-			.then((response: AxiosResponse<PostResponse[]>) => {
+			.get('/v1/seline/post/list')
+			.then((response: AxiosResponse<APIResponse<PostResponse[]>>) => {
 				const { data } = response
 				return data
 			})
-			.catch((error: AxiosError) => {
-				throw error
+			.catch((error: AxiosError<ErrorAPIResponse>) => {
+				const { response } = error
+				throw response?.data !== undefined ? response.data : {}
 			})
 	}
 
 	/**
 	 * Get comments by post id
 	 *
-	 * @param   {number}  postId
+	 * @param   {number<APIResponse><CommentResponse>[]}   postId
 	 *
-	 * @return  {Promise<CommentResponse[]>}
+	 * @return  {Promise<APIResponse><CommentResponse>[]}
 	 */
-	public async GetCommentsByPostId(postId: number): Promise<CommentResponse[]> {
+	public async GetPostComments(postId: number): Promise<APIResponse<CommentResponse[]>> {
 		return this.$axios
-			.get(`/posts/${postId}/comments`)
-			.then((response: AxiosResponse<CommentResponse[]>) => {
+			.get(`/v1/seline/post/comment`, {
+				params: {
+					postId
+				}
+			})
+			.then((response: AxiosResponse<APIResponse<CommentResponse[]>>) => {
 				const { data } = response
 				return data
 			})
-			.catch((error: AxiosError) => {
-				throw error
+			.catch((error: AxiosError<ErrorAPIResponse>) => {
+				const { response } = error
+				throw response?.data !== undefined ? response.data : {}
 			})
 	}
 }

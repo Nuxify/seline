@@ -3,5 +3,5 @@ import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {
 	// get all posts
-	socialAPI.getPostsStore.GetPosts()
+	socialAPI.getPostsStore.call()
 }
