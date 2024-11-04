@@ -1,4 +1,4 @@
-import type { APIResponse } from '../models/dto'
+import type { APIResponse } from '$lib/core/domain/models/dto'
 import type {
 	CreatePostRequest,
 	CreatePostResponse,
