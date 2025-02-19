@@ -13,4 +13,4 @@ package-lock.json
 yarn.lock
 
 # Specific template files
-src/lib/core/interfaces/components/SEO.svelte
+src/lib/core/interfaces/components/common/SEO.svelte

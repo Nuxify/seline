@@ -2,9 +2,8 @@
 	import { goto } from '$app/navigation'
 	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
-	import { Button } from '$lib/components/ui/button'
-	import * as Card from '$lib/components/ui/card'
-	import { SEO } from '$components'
+	import { Button, Card } from '$components/ui'
+	import { SEO } from '$components/common'
 
 	/**
 	 * Back to main page

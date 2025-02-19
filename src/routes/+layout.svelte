@@ -1,6 +1,6 @@
 <script>
-	import * as Alert from '$lib/components/ui/alert'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
+	import { Alert } from '$components/ui'
 	import '../app.scss'
 	import '../app.postcss'
 </script>

@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { Input } from '$lib/components/ui/input'
-	import { Button } from '$lib/components/ui/button'
-	import * as Card from '$lib/components/ui/card'
 	import {
 		socialAPI,
 		createPostStore,
@@ -13,7 +10,8 @@
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
-	import { SEO } from '$components'
+	import { Input, Button, Card } from '$components/ui'
+	import { SEO } from '$components/common'
 
 	let title: string
 	let body: string

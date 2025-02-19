@@ -7,8 +7,9 @@
 		"baseColor": "slate"
 	},
 	"aliases": {
-		"components": "$lib/components",
-		"utils": "$lib/utils"
+		"components": "$components",
+		"ui": "$components/ui",
+		"utils": "$lib/internal/utils"
 	},
 	"typescript": true
 }

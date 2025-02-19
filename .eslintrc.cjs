@@ -43,7 +43,7 @@ module.exports = {
 			}
 		},
 		{
-			files: ['src/lib/components/**/*.{ts,svelte}'],
+			files: ['src/lib/core/interfaces/components/**/*.{ts,svelte}'],
 			rules: {
 				'@typescript-eslint/no-unused-vars': 'off'
 			}

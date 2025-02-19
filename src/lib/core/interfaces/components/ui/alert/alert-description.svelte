@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements'
-	import { cn } from '$lib/utils.js'
+	import { cn } from '$lib/internal/utils.js'
 
 	type $$Props = HTMLAttributes<HTMLDivElement>
 
@@ -8,6 +8,6 @@
 	export { className as class }
 </script>
 
-<div class={cn('flex items-center p-6 pt-0', className)} {...$$restProps}>
+<div class={cn('text-sm [&_p]:leading-relaxed', className)} {...$$restProps}>
 	<slot />
 </div>
