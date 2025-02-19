@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { Button } from '$lib/components/ui/button'
 	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
+	import { Button } from '$lib/components/ui/button'
+	import * as Card from '$lib/components/ui/card'
 	import { SEO } from '$components'
 
 	/**
@@ -14,7 +15,7 @@
 </script>
 
 <section>
-	<div class="mx-auto mt-[30px] px-4 xl:container">
+	<div class="mx-auto mt-[30px] space-y-4 px-4 xl:container">
 		<Button
 			variant="ghost"
 			on:click={() => {
@@ -23,28 +24,31 @@
 		>
 			Back
 		</Button>
-		<h1 class="mt-10 text-center text-2xl">Post</h1>
+		<h1 class="mt-10 text-center text-2xl text-primary">Post</h1>
 
-		<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-			<h6>ID: {$homeStore.selectedPost.id}</h6>
-			<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-				{$homeStore.selectedPost.title}
-			</h5>
-			<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
-				{$homeStore.selectedPost.body}
-			</p>
-		</div>
+		<Card.Root class="mx-auto w-3/4">
+			<Card.Header>
+				<Card.Title>ID: {$homeStore.selectedPost.id}</Card.Title>
+				<Card.Title>{$homeStore.selectedPost.title}</Card.Title>
+			</Card.Header>
+			<Card.Content class="py-2">
+				<Card.Description class="text-sm">{$homeStore.selectedPost.body}</Card.Description>
+			</Card.Content>
+		</Card.Root>
+
 		<h1 class="mt-10 text-center text-2xl text-primary">Comments</h1>
 
 		<!-- comments list -->
 		{#each $getPostCommentsStore.response.data as item}
-			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-				<h6>Name: {item.name}</h6>
-				<h5 class="mb-2 text-sm font-medium lowercase tracking-tight text-gray-500 dark:text-white">
-					{item.email}
-				</h5>
-				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{item.body}</p>
-			</div>
+			<Card.Root class="mx-auto w-3/4">
+				<Card.Header>
+					<Card.Title>{item.name}</Card.Title>
+				</Card.Header>
+				<Card.Content class="py-3">
+					<Card.Description class="mb-2">{item.email}</Card.Description>
+					<Card.Description class="text-sm">{item.body}</Card.Description>
+				</Card.Content>
+			</Card.Root>
 		{/each}
 	</div>
 </section>

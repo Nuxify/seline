@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation'
 	import { Input } from '$lib/components/ui/input'
 	import { Button } from '$lib/components/ui/button'
+	import * as Card from '$lib/components/ui/card'
 	import {
 		socialAPI,
 		createPostStore,
@@ -76,7 +77,7 @@
 </script>
 
 <section>
-	<div class="mx-auto px-4 pt-[30px] xl:container">
+	<div class="mx-auto space-y-3 px-4 pt-[30px] xl:container">
 		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
 		<div class="mx-auto mb-7 mt-12 w-3/4">
 			<h1 class="text-xl text-primary">Create a post</h1>
@@ -96,21 +97,24 @@
 
 		<!-- posts list -->
 		{#each $getPostsStore.response.data as post}
-			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-				<h6>ID: {post.id}</h6>
-				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-					{post.title}
-				</h5>
-				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{post.body}</p>
-				<Button
-					class="ml-auto block"
-					on:click={() => {
-						viewComments(post)
-					}}
-				>
-					View Comments
-				</Button>
-			</div>
+			<Card.Root class="mx-auto w-3/4">
+				<Card.Header>
+					<Card.Title>{post.id} • {post.title}</Card.Title>
+				</Card.Header>
+				<Card.Content class="py-3">
+					<Card.Description class="text-sm">{post.body}</Card.Description>
+				</Card.Content>
+				<Card.Footer>
+					<Button
+						class="ml-auto block"
+						on:click={() => {
+							viewComments(post)
+						}}
+					>
+						View Comments
+					</Button>
+				</Card.Footer>
+			</Card.Root>
 		{/each}
 	</div>
 </section>
