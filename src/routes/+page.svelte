@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { Button, Input } from 'flowbite-svelte'
+	import { Input } from '$lib/components/ui/input'
+	import { Button } from '$lib/components/ui/button'
 	import {
 		socialAPI,
 		createPostStore,
@@ -79,27 +80,16 @@
 		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
 		<div class="mx-auto mb-7 mt-12 w-3/4">
 			<h1 class="text-xl text-primary">Create a post</h1>
-			<div class="flex flex-col items-center md:flex-row">
-				<Input
-					bind:value={title}
-					type="text"
-					placeholder="Enter title"
-					class="md:border--radius-l-full mr-5 w-full rounded-full border-none bg-gray-100 !ring-transparent"
-				/>
-				<Input
-					bind:value={body}
-					type="text"
-					placeholder="Enter body"
-					class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
-				/>
+			<div class="flex flex-col items-center gap-2 md:flex-row">
+				<Input bind:value={title} type="text" placeholder="Enter title" />
+				<Input bind:value={body} type="text" placeholder="Enter body" />
 				<Button
-					class="btn--primary ml-5 w-[100px] rounded-full"
 					disabled={$createPostStore.state.LOADING}
 					on:click={() => {
 						createPost()
 					}}
 				>
-					<span class="lato--font-regular px-4 text-white"> Post </span>
+					Post
 				</Button>
 			</div>
 		</div>
@@ -113,7 +103,7 @@
 				</h5>
 				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{post.body}</p>
 				<Button
-					class="ml-auto mt-5 flex bg-primary focus:ring-0"
+					class="ml-auto block"
 					on:click={() => {
 						viewComments(post)
 					}}

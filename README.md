@@ -32,14 +32,8 @@ Example:
     import { sineIn } from 'svelte/easing'
     import { MapLibre, Marker, Popup } from 'svelte-maplibre'
     import { ChevronLeftOutline, ChevronRightOutline, PlusSolid } from 'flowbite-svelte-icons'
-    import {
-        Button,
-		ButtonGroup,
-		Drawer,
-		Modal,
-		Input,
-		Table
-	} from 'flowbite-svelte'
+	import { Input } from '$lib/components/ui/input'
+	import { Button } from '$lib/components/ui/button'
     import {
 		checkpointAPI,
 		addCheckpointStore,
@@ -58,6 +52,21 @@ Example:
     ...
 </script>
 ```
+
+## Adding Shadcn/UI Components
+
+```bash
+# add button component
+npx shadcn-svelte@latest add button
+
+# add input component
+npx shadcn-svelte@latest add input
+
+# add alert component
+npx shadcn-svelte@latest add alert
+```
+
+> Note: You can add more components by following the [Shadcn/UI](https://www.shadcn-svelte.com/docs) documentation.
 
 ## Developing
 
