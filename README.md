@@ -31,7 +31,7 @@ Example:
     import { onMount } from 'svelte'
     import { sineIn } from 'svelte/easing'
     import { MapLibre, Marker, Popup } from 'svelte-maplibre'
-    import { ChevronLeftOutline, ChevronRightOutline, PlusSolid } from 'flowbite-svelte-icons'
+	import { SquarePen } from 'lucide-svelte'
     import {
         checkpointAPI,
 		addCheckpointStore,
