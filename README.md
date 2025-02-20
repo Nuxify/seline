@@ -32,10 +32,8 @@ Example:
     import { sineIn } from 'svelte/easing'
     import { MapLibre, Marker, Popup } from 'svelte-maplibre'
     import { ChevronLeftOutline, ChevronRightOutline, PlusSolid } from 'flowbite-svelte-icons'
-	import { Input } from '$lib/components/ui/input'
-	import { Button } from '$lib/components/ui/button'
     import {
-		checkpointAPI,
+        checkpointAPI,
 		addCheckpointStore,
 		deleteCheckpointStore,
 		getCheckpointsStore,
@@ -45,7 +43,8 @@ Example:
     import { globalStore } from '$lib/application/service/store/global.store'
     import { MessageStatus } from '$lib/application/service/store/global.dto'
     import { uploadFileStore } from '$lib/application/service/store/media.api.store'
-    import { SEO } from '$components'
+    import { Input, Button, Card } from '$components/ui'
+    import { SEO } from '$components/common'
     import { locale, t } from '$lib/internal/translations'
     import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '$lib/internal/utils'
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
+	import { SquarePen } from 'lucide-svelte'
 	import {
 		socialAPI,
 		createPostStore,
@@ -88,7 +89,8 @@
 						createPost()
 					}}
 				>
-					Post
+					<SquarePen size={18} />
+					<span class="ml-1">Post</span>
 				</Button>
 			</div>
 		</div>
