@@ -1,4 +1,4 @@
-Copyright 2020 The Inter Project Authors (https://github.com/itfoundry/inter)
+Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/poppins)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
@@ -8,7 +8,7 @@ https://openfontlicense.org
 SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
 -----------------------------------------------------------
 
-Link: https://fonts.google.com/specimen/Inter
+Link: https://fonts.google.com/specimen/Poppins
 
 PREAMBLE
 The goals of the Open Font License (OFL) are to stimulate worldwide
