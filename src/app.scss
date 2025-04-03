@@ -1,3 +1,14 @@
-.btn--primary {
-	background-color: #ee1f70 !important;
+html,
+body {
+	font-family:
+		'Poppins',
+		system-ui,
+		-apple-system,
+		sans-serif;
+	font-weight: normal;
+	font-display: swap;
+	scroll-behavior: smooth !important;
+	overflow-x: hidden;
+	line-height: 1.5;
+	text-rendering: optimizeLegibility;
 }
