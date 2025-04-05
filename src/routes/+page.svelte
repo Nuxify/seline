@@ -93,7 +93,7 @@
 					class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
 				/>
 				<Button
-					class="btn--primary ml-5 w-[100px] rounded-full"
+					class="ml-5 w-[100px] rounded-full bg-primary"
 					disabled={$createPostStore.state.LOADING}
 					on:click={() => {
 						createPost()
