@@ -8,12 +8,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [
 		vitePreprocess({}),
-		preprocess({
-			postcss: true,
-			scss: {
-				prependData: '@use "src/app.scss" as *;'
-			}
-		})
+		preprocess({ postcss: true, scss: { prependData: '@use "src/app.scss" as *;' } })
 	],
 	kit: {
 		adapter: adapter({
@@ -25,9 +20,7 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		alias: {
-			$components: 'src/lib/core/interfaces/components'
-		}
+		alias: { $components: 'src/lib/core/interfaces/components' }
 	}
 }
 
