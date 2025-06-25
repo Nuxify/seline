@@ -1,8 +1,15 @@
-<script>
+<script lang="ts">
+	import { type Snippet } from 'svelte'
 	import { Alert } from 'flowbite-svelte'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import '../app.scss'
 	import '../app.postcss'
+
+	interface Props {
+		children?: Snippet
+	}
+
+	let { children }: Props = $props()
 </script>
 
 <!-- alert -->
@@ -15,4 +22,4 @@
 	</Alert>
 {/if}
 
-<slot />
+{@render children?.()}

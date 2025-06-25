@@ -13,8 +13,8 @@
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
-	let title: string
-	let body: string
+	let title: string = $state('')
+	let body: string = $state('')
 
 	const subscriptions: Array<() => void> = []
 

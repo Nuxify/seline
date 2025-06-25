@@ -1,11 +1,15 @@
 <script lang="ts">
-	export let title: string = ''
-	export let description: string = ''
-	export let url: string = ''
+	interface Props {
+		title: string
+		description: string
+		url: string
+	}
 
-	$: pageTitle = title
-	$: pageDescription = description
-	$: pageUrl = url
+	let { title = '', description = '', url = '' }: Props = $props()
+
+	let pageTitle = $derived(title)
+	let pageDescription = $derived(description)
+	let pageUrl = $derived(url)
 </script>
 
 <svelte:head>
