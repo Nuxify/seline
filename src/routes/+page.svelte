@@ -11,7 +11,7 @@
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
-	import { SEO } from '$components'
+	import { PostCard, SEO } from '$components'
 
 	let title: string
 	let body: string
@@ -106,21 +106,7 @@
 
 		<!-- posts list -->
 		{#each $getPostsStore.response.data as post}
-			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-				<h6>ID: {post.id}</h6>
-				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-					{post.title}
-				</h5>
-				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{post.body}</p>
-				<Button
-					class="ml-auto mt-5 flex bg-primary focus:ring-0"
-					on:click={() => {
-						viewComments(post)
-					}}
-				>
-					View Comments
-				</Button>
-			</div>
+			<PostCard {post} {viewComments} />
 		{/each}
 	</div>
 </section>

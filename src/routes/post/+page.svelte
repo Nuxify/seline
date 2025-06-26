@@ -3,7 +3,7 @@
 	import { Button } from 'flowbite-svelte'
 	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
-	import { SEO } from '$components'
+	import { PostCard, SEO } from '$components'
 
 	/**
 	 * Back to main page
@@ -25,15 +25,8 @@
 		</Button>
 		<h1 class="mt-10 text-center text-2xl text-primary">Post</h1>
 
-		<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-			<h6>ID: {$homeStore.selectedPost.id}</h6>
-			<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-				{$homeStore.selectedPost.title}
-			</h5>
-			<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
-				{$homeStore.selectedPost.body}
-			</p>
-		</div>
+		<PostCard post={$homeStore.selectedPost} showViewButton={false} />
+
 		<h1 class="mt-10 text-center text-2xl text-primary">Comments</h1>
 
 		<!-- comments list -->
