@@ -35,7 +35,7 @@ const config: PlaywrightTestConfig = {
 			slowMo: 50
 		}
 	},
-	testDir: 'tests',
+	testDir: 'tests/e2e',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/
 }
 
