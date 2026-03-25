@@ -13,8 +13,8 @@
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
-	let title: string = $state()
-	let body: string = $state()
+	let title: string = $state("")
+	let body: string = $state("")
 
 	const subscriptions: Array<() => void> = []
 
@@ -55,8 +55,8 @@
 	async function createPost(): Promise<void> {
 		socialAPI.createPostStore.call({
 			userId: 1,
-			title,
-			body
+			title: title,
+			body: body
 		})
 	}
 
