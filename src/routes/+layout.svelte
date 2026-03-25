@@ -3,6 +3,7 @@
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import '../app.scss'
 	import '../app.postcss'
+	
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
