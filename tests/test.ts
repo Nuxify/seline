@@ -33,5 +33,5 @@ test('view comments navigates to post page and shows selected post', async ({ pa
 	await expect(page.getByRole('heading', { name: 'Post' })).toBeVisible()
 
 	// the post title should be visible
-	await expect(page.locator('h5')).toContainText(firstPostTitle)
+	await expect(page.locator('h5').first()).toContainText(firstPostTitle)
 })
