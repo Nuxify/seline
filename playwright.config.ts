@@ -8,10 +8,10 @@ const config: PlaywrightTestConfig = {
 	},
 	testDir: 'tests/e2e',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
-	fullyParallel: true,
+	fullyParallel: false,
 	reporter: 'html',
 	use: {
-		baseURL: 'http://localhost:5173/',
+		baseURL: 'http://localhost:4173/',
 		trace: 'on-first-retry'
 	},
 	projects: [

@@ -1,12 +1,10 @@
 import { expect, test } from '@playwright/test'
 
-test('index page has expected h1', async ({ page }) => {
-	await page.goto('/')
-	await expect(page.getByRole('heading', { name: 'Seline: Social Media' })).toBeVisible()
-})
-
 test('inputs are cleared after creating post', async ({ page }) => {
 	await page.goto('/')
+
+	// should show heading "Seline: Social Media"
+	await expect(page.getByRole('heading', { name: 'Seline: Social Media' })).toBeVisible()
 
 	// fill inputs
 	await page.getByPlaceholder('Enter title').fill('E2E Test Title')
@@ -18,10 +16,6 @@ test('inputs are cleared after creating post', async ({ page }) => {
 	// after successful, the form fields should be cleared
 	await expect(page.getByPlaceholder('Enter title')).toHaveValue('')
 	await expect(page.getByPlaceholder('Enter body')).toHaveValue('')
-})
-
-test('view comments navigates to post page and shows selected post', async ({ page }) => {
-	await page.goto('/')
 
 	const firstPostTitle = (await page.locator('h5').first().textContent()) || ''
 
@@ -34,4 +28,6 @@ test('view comments navigates to post page and shows selected post', async ({ pa
 
 	// the post title should be visible
 	await expect(page.locator('h5').first()).toContainText(firstPostTitle)
+
+	await page.goBack()
 })
