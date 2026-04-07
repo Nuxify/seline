@@ -1,52 +1,37 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte'
+	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { Button, Input } from 'flowbite-svelte'
 	import {
 		socialAPI,
-		createPostStore,
-		getPostsStore
-	} from '$lib/core/application/service/store/social.api.store'
-	import { globalStore } from '$lib/core/application/service/store/global.store'
+		createPostState,
+		getPostsState
+	} from '$lib/core/application/service/store/social.api.state.svelte'
+	import { ShowAlert } from '$lib/core/application/service/store/global.state.svelte'
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
-	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
+	import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
-	let title: string = $state("")
-	let body: string = $state("")
+	let title: string = $state('')
+	let body: string = $state('')
 
-	const subscriptions: Array<() => void> = []
+	// TODO: centralize this effect
+	$effect(() => {
+		if (!browser) return
+		const { SUCCESS, FAILED } = createPostState.state
+		if (!SUCCESS && !FAILED) return
 
-	onMount(async () => {
-		// watchers or subscribers should be here
-		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
-			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
-				if (createPostState.state.SUCCESS) {
-					title = ''
-					body = ''
-					console.log('New post id:', createPostState.response.data.id)
-				}
+		if (SUCCESS) {
+			title = ''
+			body = ''
+			console.log('New post id:', createPostState.response.data.id)
+		}
 
-				// show alert prompt
-				globalStore.ShowAlert({
-					message: createPostState.response.message,
-					variant: createPostState.state.FAILED ? MessageStatus.ERROR : MessageStatus.SUCCESS
-				})
-			}
+		ShowAlert({
+			message: createPostState.response.message,
+			variant: FAILED ? MessageStatus.ERROR : MessageStatus.SUCCESS
 		})
-
-		const getPostsSubscription = socialAPI.getPostsStore.subscribe((getPostsState) => {
-			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
-				console.log(getPostsState.response.message)
-			}
-		})
-
-		subscriptions.push(createPostSubscription, getPostsSubscription)
-	})
-
-	onDestroy(() => {
-		subscriptions.forEach((unsubscribe) => unsubscribe())
 	})
 
 	/**
@@ -65,11 +50,7 @@
 	 * @param pageId
 	 */
 	function viewComments(post: Post): void {
-		homeStore.update((state) => {
-			state.selectedPost = post
-			return state
-		})
-
+		homeState.selectedPost = post
 		goto(`/post`)
 	}
 </script>
@@ -94,7 +75,7 @@
 				/>
 				<Button
 					class="ml-5 w-[100px] rounded-full bg-primary"
-					disabled={$createPostStore.state.LOADING}
+					disabled={createPostState.state.LOADING}
 					on:click={() => {
 						createPost()
 					}}
@@ -105,7 +86,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each $getPostsStore.response.data as post}
+		{#each getPostsState.response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

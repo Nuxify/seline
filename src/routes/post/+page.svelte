@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { Button } from 'flowbite-svelte'
-	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
-	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
+	import { getPostCommentsState } from '$lib/core/application/service/store/social.api.state.svelte'
+	import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
 	import { SEO } from '$components'
 
 	/**
@@ -26,18 +26,18 @@
 		<h1 class="mt-10 text-center text-2xl text-primary">Post</h1>
 
 		<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-			<h6>ID: {$homeStore.selectedPost.id}</h6>
+			<h6>ID: {homeState.selectedPost.id}</h6>
 			<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-				{$homeStore.selectedPost.title}
+				{homeState.selectedPost.title}
 			</h5>
 			<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
-				{$homeStore.selectedPost.body}
+				{homeState.selectedPost.body}
 			</p>
 		</div>
 		<h1 class="mt-10 text-center text-2xl text-primary">Comments</h1>
 
 		<!-- comments list -->
-		{#each $getPostCommentsStore.response.data as item}
+		{#each getPostCommentsState.response.data as item}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>Name: {item.name}</h6>
 				<h5 class="mb-2 text-sm font-medium lowercase tracking-tight text-gray-500 dark:text-white">
@@ -50,7 +50,7 @@
 </section>
 
 <SEO
-	title={$homeStore.selectedPost.title}
-	description={$homeStore.selectedPost.body}
-	url={`https://seline.pages.dev/post/${$homeStore.selectedPost.id}`}
+	title={homeState.selectedPost.title}
+	description={homeState.selectedPost.body}
+	url={`https://seline.pages.dev/post/${homeState.selectedPost.id}`}
 />

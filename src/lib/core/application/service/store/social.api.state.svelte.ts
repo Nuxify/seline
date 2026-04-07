@@ -1,4 +1,3 @@
-import { writable } from 'svelte/store'
 import { SocialRepository } from '$lib/servicecontainer'
 import type {
 	CreatePostResponse as ModelCreatePostResponse,
@@ -14,7 +13,7 @@ import type {
 } from './social.api.dto'
 import { createAPIHandler } from '$lib/internal/api.store'
 
-const createPostWritable = writable<StateDTO<CreatePostResponse>>({
+const createPostInitial: StateDTO<CreatePostResponse> = {
 	state: {
 		LOADING: false,
 		SUCCESS: false,
@@ -25,8 +24,9 @@ const createPostWritable = writable<StateDTO<CreatePostResponse>>({
 		errorCode: null,
 		data: {} as CreatePostResponse
 	}
-})
-const getCommentsWritable = writable<StateDTO<CommentResponse[]>>({
+}
+
+const getPostCommentsInitial: StateDTO<CommentResponse[]> = {
 	state: {
 		LOADING: false,
 		SUCCESS: false,
@@ -37,8 +37,9 @@ const getCommentsWritable = writable<StateDTO<CommentResponse[]>>({
 		errorCode: null,
 		data: [] as CommentResponse[]
 	}
-})
-const getPostsWritable = writable<StateDTO<PostResponse[]>>({
+}
+
+const getPostsInitial: StateDTO<PostResponse[]> = {
 	state: {
 		LOADING: false,
 		SUCCESS: false,
@@ -49,16 +50,20 @@ const getPostsWritable = writable<StateDTO<PostResponse[]>>({
 		errorCode: null,
 		data: [] as PostResponse[]
 	}
-})
+}
+
+export const createPostState = $state<StateDTO<CreatePostResponse>>(createPostInitial)
+export const getPostsState = $state<StateDTO<PostResponse[]>>(getPostsInitial)
+export const getPostCommentsState = $state<StateDTO<CommentResponse[]>>(getPostCommentsInitial)
 
 export const createPostStore = createAPIHandler<
 	CreatePostRequest,
 	ModelCreatePostResponse,
 	CreatePostResponse
->(createPostWritable, SocialRepository.CreatePost.bind(SocialRepository))
+>(createPostState, SocialRepository.CreatePost.bind(SocialRepository))
 
 export const getPostsStore = createAPIHandler<void, ModelPostResponse[], PostResponse[]>(
-	getPostsWritable,
+	getPostsState,
 	SocialRepository.GetPosts.bind(SocialRepository)
 )
 
@@ -66,7 +71,7 @@ export const getPostCommentsStore = createAPIHandler<
 	number,
 	ModelCommentResponse[],
 	CommentResponse[]
->(getCommentsWritable, SocialRepository.GetPostComments.bind(SocialRepository))
+>(getPostCommentsState, SocialRepository.GetPostComments.bind(SocialRepository))
 
 export const socialAPI = {
 	createPostStore,

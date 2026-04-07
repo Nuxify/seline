@@ -1,11 +1,11 @@
 <script lang="ts">
 	interface Props {
-		title?: string;
-		description?: string;
-		url?: string;
+		title?: string
+		description?: string
+		url?: string
 	}
 
-	let { title = '', description = '', url = '' }: Props = $props();
+	let { title = '', description = '', url = '' }: Props = $props()
 
 	let pageTitle = $derived(title)
 	let pageDescription = $derived(description)
