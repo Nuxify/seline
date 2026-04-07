@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { Button, Input } from 'flowbite-svelte'
 	import {
@@ -16,33 +15,33 @@
 	let title: string = $state('')
 	let body: string = $state('')
 
-	// TODO: centralize this effect
-	$effect(() => {
-		if (!browser) return
-		const { SUCCESS, FAILED } = createPostState.state
-		if (!SUCCESS && !FAILED) return
-
-		if (SUCCESS) {
-			title = ''
-			body = ''
-			console.log('New post id:', createPostState.response.data.id)
-		}
-
-		ShowAlert({
-			message: createPostState.response.message,
-			variant: FAILED ? MessageStatus.ERROR : MessageStatus.SUCCESS
-		})
-	})
-
 	/**
 	 * Create a post
 	 */
 	async function createPost(): Promise<void> {
-		socialAPI.createPostStore.call({
-			userId: 1,
-			title: title,
-			body: body
-		})
+		try {
+			await socialAPI.createPostStore.call({
+				userId: 1,
+				title,
+				body
+			})
+			const response = createPostState.response
+			const failed = response.errorCode != null
+			if (!failed) {
+				title = ''
+				body = ''
+				console.log('New post id:', response.data.id)
+			}
+			ShowAlert({
+				message: response.message,
+				variant: failed ? MessageStatus.ERROR : MessageStatus.SUCCESS
+			})
+		} catch (error) {
+			ShowAlert({
+				message: (error as Error).message,
+				variant: MessageStatus.ERROR
+			})
+		}
 	}
 
 	/**
