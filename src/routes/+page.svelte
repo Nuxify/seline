@@ -7,7 +7,7 @@
 		getPostsState
 	} from '$lib/core/application/service/store/social.api.state.svelte'
 	import { ShowAlert } from '$lib/core/application/service/store/global.state.svelte'
-	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
+	import { MessageStatus, type StateDTO } from '$lib/core/application/service/store/global.dto'
 	import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
@@ -15,10 +15,64 @@
 	let title: string = $state('')
 	let body: string = $state('')
 
+	// FOR TESTING PURPOSES: global state context test
+	// let globalStateContext = getGlobalStateContext()
+
+	// FOR TESTING PURPOSES: $effect state listeners
+	// $effect(()=>{
+	// 	if(getPostsState.state.SUCCESS || getPostsState.state.FAILED){
+			
+	// 		const createPostStateSnapshot = untrack(() => createPostState.state.SUCCESS)
+	// 		const titleSnapshot = untrack(() => title)
+
+	// 		if(getPostsState.state.SUCCESS){
+	// 			if(titleSnapshot){
+	// 				console.log("title changed")
+	// 			}
+
+	// 			if(createPostStateSnapshot){
+	// 				console.log("create post from get post listener")
+	// 			}
+	// 			console.log('Posts fetched successfully:', getPostsState.response.data)
+	// 		} else {
+	// 			console.error('Failed to fetch posts:', getPostsState.response.message)
+	// 		}
+	// 		ShowAlert({
+	// 			message: getPostsState.response.message,
+	// 			variant: getPostsState.state.FAILED? MessageStatus.ERROR : MessageStatus.SUCCESS
+	// 		})
+	// 	}
+	// })
+
+	// $effect(()=>{
+	// 	if(createPostState.state.SUCCESS || createPostState.state.FAILED){
+	// 		if(createPostState.state.SUCCESS){
+	// 			console.log('Post created successfully:', createPostState.response.data)
+	// 		$inspect(createPostState.state)
+	// 		} else {
+	// 			console.error('Failed to create post:', createPostState.response.message)
+	// 		}
+	// 		ShowAlert({
+	// 			message: createPostState.response.message,
+	// 			variant: createPostState.state.FAILED? MessageStatus.ERROR : MessageStatus.SUCCESS
+	// 		})
+	// 	}
+	// })
+
 	/**
 	 * Create a post
 	 */
-	async function createPost(): Promise<void> {
+	async function createPost():Promise<void> {
+
+		// FOR TESTING PURPOSES: global state context test
+		// globalStateContext.isShowDrawer = true
+		
+		socialAPI.createPostStore.call({
+			userId: 1,
+			title,
+			body
+		})
+
 		try {
 			await socialAPI.createPostStore.call({
 				userId: 1,
@@ -27,6 +81,7 @@
 			})
 			const response = createPostState.response
 			const failed = response.errorCode != null
+
 			if (!failed) {
 				title = ''
 				body = ''

@@ -67,10 +67,17 @@ export function createAPIHandler<TRequest, TResponse, TMappedResponse>(
 					onErrorFn(err)
 				}
 			} finally {
+				// Only clear the LOADING flag here. Do not reset SUCCESS/FAILED —
+				// they indicate the result of the call and should be observed by $effect.
 				state.state.LOADING = false
-				state.state.SUCCESS = false
-				state.state.FAILED = false
 			}
+		},
+
+		// reset result flags and response
+		reset(): void {
+			state.state.SUCCESS = false
+			state.state.FAILED = false
+			state.state.LOADING = false
 		}
 	}
 }

@@ -3,7 +3,7 @@
 	import { Button } from 'flowbite-svelte'
 	import { getPostCommentsState } from '$lib/core/application/service/store/social.api.state.svelte'
 	import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
-	import { SEO } from '$components'
+	import { Comment, SEO } from '$components'
 
 	/**
 	 * Back to main page
@@ -11,6 +11,11 @@
 	function goBack(): void {
 		goto('/')
 	}
+
+	// FOR TESTING PURPOSES: global state context test
+	// let globalStateContext = getGlobalStateContext()
+	// $inspect("from page", globalStateContext)
+
 </script>
 
 <section>
@@ -21,7 +26,7 @@
 				goBack()
 			}}
 		>
-			<span class="lato--font-regular px-4 text-primary"> Back </span>
+				<span class="lato--font-regular px-4 text-primary"> Back </span>
 		</Button>
 		<h1 class="mt-10 text-center text-2xl text-primary">Post</h1>
 
@@ -38,13 +43,11 @@
 
 		<!-- comments list -->
 		{#each getPostCommentsState.response.data as item}
-			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-				<h6>Name: {item.name}</h6>
-				<h5 class="mb-2 text-sm font-medium lowercase tracking-tight text-gray-500 dark:text-white">
-					{item.email}
-				</h5>
-				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{item.body}</p>
-			</div>
+			<Comment
+				name={item.name}
+				email={item.email}
+				body={item.body}
+			/>
 		{/each}
 	</div>
 </section>
