@@ -1,3 +1,4 @@
+import { writable } from 'svelte/store'
 import type { StateDTO } from './home.dto'
 
 const state: StateDTO = {
@@ -8,5 +9,9 @@ const state: StateDTO = {
 		body: ''
 	}
 }
+const { subscribe, update } = writable(state)
 
-export const homeState = $state<StateDTO>(state)
+export const homeStore = {
+	subscribe,
+	update
+}

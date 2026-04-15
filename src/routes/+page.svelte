@@ -1,102 +1,63 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { Button, Input } from 'flowbite-svelte'
 	import {
 		socialAPI,
-		createPostState,
-		getPostsState
-	} from '$lib/core/application/service/store/social.api.state.svelte'
-	import { ShowAlert } from '$lib/core/application/service/store/global.state.svelte'
-	import { MessageStatus, type StateDTO } from '$lib/core/application/service/store/global.dto'
-	import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
+		createPostStore,
+		getPostsStore
+	} from '$lib/core/application/service/store/social.api.store'
+	import { globalStore } from '$lib/core/application/service/store/global.store'
+	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
+	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
-	let title: string = $state('')
-	let body: string = $state('')
+	let title: string
+	let body: string
 
-	// FOR TESTING PURPOSES: global state context test
-	// let globalStateContext = getGlobalStateContext()
+	const subscriptions: Array<() => void> = []
 
-	// FOR TESTING PURPOSES: $effect state listeners
-	// $effect(()=>{
-	// 	if(getPostsState.state.SUCCESS || getPostsState.state.FAILED){
-			
-	// 		const createPostStateSnapshot = untrack(() => createPostState.state.SUCCESS)
-	// 		const titleSnapshot = untrack(() => title)
+	onMount(async () => {
+		// watchers or subscribers should be here
+		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
+			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
+				if (createPostState.state.SUCCESS) {
+					title = ''
+					body = ''
+					console.log('New post id:', createPostState.response.data.id)
+				}
 
-	// 		if(getPostsState.state.SUCCESS){
-	// 			if(titleSnapshot){
-	// 				console.log("title changed")
-	// 			}
+				// show alert prompt
+				globalStore.ShowAlert({
+					message: createPostState.response.message,
+					variant: createPostState.state.FAILED ? MessageStatus.ERROR : MessageStatus.SUCCESS
+				})
+			}
+		})
 
-	// 			if(createPostStateSnapshot){
-	// 				console.log("create post from get post listener")
-	// 			}
-	// 			console.log('Posts fetched successfully:', getPostsState.response.data)
-	// 		} else {
-	// 			console.error('Failed to fetch posts:', getPostsState.response.message)
-	// 		}
-	// 		ShowAlert({
-	// 			message: getPostsState.response.message,
-	// 			variant: getPostsState.state.FAILED? MessageStatus.ERROR : MessageStatus.SUCCESS
-	// 		})
-	// 	}
-	// })
+		const getPostsSubscription = socialAPI.getPostsStore.subscribe((getPostsState) => {
+			if (getPostsState.state.SUCCESS || getPostsState.state.FAILED) {
+				console.log(getPostsState.response.message)
+			}
+		})
 
-	// $effect(()=>{
-	// 	if(createPostState.state.SUCCESS || createPostState.state.FAILED){
-	// 		if(createPostState.state.SUCCESS){
-	// 			console.log('Post created successfully:', createPostState.response.data)
-	// 		$inspect(createPostState.state)
-	// 		} else {
-	// 			console.error('Failed to create post:', createPostState.response.message)
-	// 		}
-	// 		ShowAlert({
-	// 			message: createPostState.response.message,
-	// 			variant: createPostState.state.FAILED? MessageStatus.ERROR : MessageStatus.SUCCESS
-	// 		})
-	// 	}
-	// })
+		subscriptions.push(createPostSubscription, getPostsSubscription)
+	})
+
+	onDestroy(() => {
+		subscriptions.forEach((unsubscribe) => unsubscribe())
+	})
 
 	/**
 	 * Create a post
 	 */
-	async function createPost():Promise<void> {
-
-		// FOR TESTING PURPOSES: global state context test
-		// globalStateContext.isShowDrawer = true
-		
+	async function createPost(): Promise<void> {
 		socialAPI.createPostStore.call({
 			userId: 1,
 			title,
 			body
 		})
-
-		try {
-			await socialAPI.createPostStore.call({
-				userId: 1,
-				title,
-				body
-			})
-			const response = createPostState.response
-			const failed = response.errorCode != null
-
-			if (!failed) {
-				title = ''
-				body = ''
-				console.log('New post id:', response.data.id)
-			}
-			ShowAlert({
-				message: response.message,
-				variant: failed ? MessageStatus.ERROR : MessageStatus.SUCCESS
-			})
-		} catch (error) {
-			ShowAlert({
-				message: (error as Error).message,
-				variant: MessageStatus.ERROR
-			})
-		}
 	}
 
 	/**
@@ -104,7 +65,11 @@
 	 * @param pageId
 	 */
 	function viewComments(post: Post): void {
-		homeState.selectedPost = post
+		homeStore.update((state) => {
+			state.selectedPost = post
+			return state
+		})
+
 		goto(`/post`)
 	}
 </script>
@@ -129,7 +94,7 @@
 				/>
 				<Button
 					class="ml-5 w-[100px] rounded-full bg-primary"
-					disabled={createPostState.state.LOADING}
+					disabled={$createPostStore.state.LOADING}
 					on:click={() => {
 						createPost()
 					}}
@@ -140,7 +105,7 @@
 		</div>
 
 		<!-- posts list -->
-		{#each getPostsState.response.data as post}
+		{#each $getPostsStore.response.data as post}
 			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
 				<h6>ID: {post.id}</h6>
 				<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">

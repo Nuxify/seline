@@ -1,3 +1,4 @@
+import type { Writable } from 'svelte/store'
 import type { APIResponse, ErrorAPIResponse } from '$lib/core/domain/models/dto'
 
 export interface StateDTO<T> {
@@ -14,70 +15,82 @@ export interface StateDTO<T> {
 }
 
 /**
- * Create an API handler that mutates reactive state.
- * @param state - Mutable API state object.
+ * Create an API handler for store.
+ * @param writable - The writable store to update with the API state.
  * @param repositoryFn - The repository function to execute.
  * @param onSuccessFn - The function to execute on success.
  * @param onErrorFn - The function to execute on error.
- * @returns The API handler with `call`.
+ * @returns The API handler.
  */
 export function createAPIHandler<TRequest, TResponse, TMappedResponse>(
-	state: StateDTO<TMappedResponse>,
+	writable: Writable<StateDTO<TMappedResponse>>,
 	repositoryFn: (request: TRequest) => Promise<APIResponse<TResponse>>,
 	onSuccessFn?: (data: TResponse) => TMappedResponse,
 	onErrorFn?: (error: ErrorAPIResponse) => void
 ) {
 	return {
+		...writable,
 		async call(request: TRequest): Promise<void> {
-			state.state.LOADING = true
-			state.state.SUCCESS = false
-			state.state.FAILED = false
+			// loading
+			writable.update((store) => {
+				store.state.LOADING = true
+				store.state.SUCCESS = false
+				store.state.FAILED = false
+				return store
+			})
 
 			try {
 				const response = await repositoryFn(request)
 
 				let mappedResponse: TMappedResponse
 				if (onSuccessFn) {
+					// execute success function
 					mappedResponse = onSuccessFn(response.data)
 				} else {
 					mappedResponse = response.data as unknown as TMappedResponse
 				}
 
-				state.state.LOADING = false
-				state.state.SUCCESS = true
-				state.state.FAILED = false
-				state.response = {
-					message: response.message,
-					errorCode: null,
-					data: mappedResponse
-				}
+				// success
+				writable.update((store) => {
+					store.state.LOADING = false
+					store.state.SUCCESS = true
+					store.state.FAILED = false
+					store.response = {
+						message: response.message,
+						errorCode: null,
+						data: mappedResponse
+					}
+					return store
+				})
 			} catch (error) {
 				const err = error as ErrorAPIResponse
 
-				state.state.LOADING = false
-				state.state.SUCCESS = false
-				state.state.FAILED = true
-				state.response = {
-					message: err.message,
-					errorCode: err.errorCode ?? null,
-					data: {} as TMappedResponse
-				}
+				// failed
+				writable.update((store) => {
+					store.state.LOADING = false
+					store.state.SUCCESS = false
+					store.state.FAILED = true
+					store.response = {
+						message: err.message,
+						errorCode: err.errorCode ?? null,
+						data: {} as TMappedResponse
+					}
+					return store
+				})
 
 				if (onErrorFn) {
+					// execute error function
 					onErrorFn(err)
 				}
 			} finally {
-				// Only clear the LOADING flag here. Do not reset SUCCESS/FAILED —
-				// they indicate the result of the call and should be observed by $effect.
-				state.state.LOADING = false
+				// reset
+				writable.update((store) => {
+					store.state.LOADING = false
+					store.state.SUCCESS = false
+					store.state.FAILED = false
+					return store
+				})
 			}
-		},
-
-		// reset result flags and response
-		reset(): void {
-			state.state.SUCCESS = false
-			state.state.FAILED = false
-			state.state.LOADING = false
 		}
 	}
 }

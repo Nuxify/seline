@@ -1,7 +1,9 @@
-import { socialAPI } from '$lib/core/application/service/store/social.api.state.svelte'
-import { homeState } from '$lib/core/module/home/application/service/store/home.state.svelte'
+import { socialAPI } from '$lib/core/application/service/store/social.api.store'
+import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
 import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {
-	socialAPI.getPostCommentsStore.call(homeState.selectedPost.id)
+	homeStore.subscribe((state) => {
+		socialAPI.getPostCommentsStore.call(state.selectedPost.id)
+	})
 }
