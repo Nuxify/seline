@@ -7,8 +7,9 @@ export default defineConfig(({ mode }) => ({
 	test: {
 		include: [
 			'src/**/*.{test,spec}.{js,ts}',
-			'tests/unit/**/*.test.ts',
-			'tests/component/**/*.test.ts'
+			'tests/component/**/*.test.ts',
+			'tests/e2e/**/*.test.ts',
+			'tests/unit/**/*.test.ts'
 		],
 		environment: 'jsdom'
 	},
