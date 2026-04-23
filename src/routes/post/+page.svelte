@@ -3,7 +3,7 @@
 	import { Button } from 'flowbite-svelte'
 	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
-	import { SEO } from '$components'
+	import { Comment, SEO } from '$components'
 
 	/**
 	 * Back to main page
@@ -38,13 +38,7 @@
 
 		<!-- comments list -->
 		{#each $getPostCommentsStore.response.data as item}
-			<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
-				<h6>Name: {item.name}</h6>
-				<h5 class="mb-2 text-sm font-medium lowercase tracking-tight text-gray-500 dark:text-white">
-					{item.email}
-				</h5>
-				<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">{item.body}</p>
-			</div>
+			<Comment name={item.name} email={item.email} body={item.body} />
 		{/each}
 	</div>
 </section>

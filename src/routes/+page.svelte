@@ -13,10 +13,10 @@
 	import type { Post } from '$lib/core/module/home/application/service/store/home.dto'
 	import { SEO } from '$components'
 
+	const subscriptions: Array<() => void> = []
+
 	let title: string
 	let body: string
-
-	const subscriptions: Array<() => void> = []
 
 	onMount(async () => {
 		// watchers or subscribers should be here
@@ -52,7 +52,7 @@
 	/**
 	 * Create a post
 	 */
-	async function createPost(): Promise<void> {
+	function createPost(): void {
 		socialAPI.createPostStore.call({
 			userId: 1,
 			title,
