@@ -1,6 +1,6 @@
 {
 	"name": "seline",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -19,7 +19,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.58.2",
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.57.1",
+		"@sveltejs/kit": "^2.61.1",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@testing-library/svelte": "^5.3.1",
 		"@testing-library/user-event": "^14.6.1",
