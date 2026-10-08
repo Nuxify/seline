@@ -1,5 +1,5 @@
 import type { Writable } from 'svelte/store'
-import type { APIResponse, ErrorAPIResponse } from '$lib/core/domain/models/dto'
+import type { APIResponse, ErrorAPIResponse } from '#lib/core/domain/models/dto.js'
 
 export interface StateDTO<T> {
 	state: {

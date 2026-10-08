@@ -1,12 +1,12 @@
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios'
-import type { ISocialRepository } from '$lib/core/domain/repository/social.repository'
-import type { APIResponse, ErrorAPIResponse } from '$lib/core/domain/models/dto'
+import type { ISocialRepository } from '#lib/core/domain/repository/social.repository.js'
+import type { APIResponse, ErrorAPIResponse } from '#lib/core/domain/models/dto.js'
 import type {
 	CreatePostRequest,
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from '$lib/core/domain/models/social.dto'
+} from '#lib/core/domain/models/social.dto.js'
 
 export class SocialRepository implements ISocialRepository {
 	private readonly $axios: AxiosInstance

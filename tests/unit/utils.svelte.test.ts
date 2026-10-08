@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { multiplier } from '$lib/internal/utils'
+import { multiplier } from '#lib/internal/utils.js'
 
 test('Multiplier', () => {
 	let count = $state(0)

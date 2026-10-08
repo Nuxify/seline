@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Alert } from 'flowbite-svelte'
-	import { globalStore } from '$lib/core/application/service/store/global.store'
+	import { globalStore } from '#lib/core/application/service/store/global.store.js'
 </script>
 
 {#if $globalStore.showAlert}

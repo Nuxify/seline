@@ -46,14 +46,14 @@ Example:
 		deleteCheckpointStore,
 		getCheckpointsStore,
 		updateCheckpointStore
-	} from '$lib/application/service/store/checkpoint.api.store'
-    import type { CheckpointResponse } from '$lib/application/service/store/checkpoint.api.dto'
-    import { globalStore } from '$lib/application/service/store/global.store'
-    import { MessageStatus } from '$lib/application/service/store/global.dto'
-    import { uploadFileStore } from '$lib/application/service/store/media.api.store'
+	} from '#lib/application/service/store/checkpoint.api.store'
+    import type { CheckpointResponse } from '#lib/application/service/store/checkpoint.api.dto'
+    import { globalStore } from '#lib/application/service/store/global.store'
+    import { MessageStatus } from '#lib/application/service/store/global.dto'
+    import { uploadFileStore } from '#lib/application/service/store/media.api.store'
     import { SEO } from '$components'
-    import { locale, t } from '$lib/internal/translations'
-    import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '$lib/internal/utils'
+    import { locale, t } from '#lib/internal/translations'
+    import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '#lib/internal/utils.js'
 
     ...
 </script>

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/svelte'
 import { expect, test } from 'vitest'
-import Comment from '$lib/core/interfaces/components/Comment.svelte'
+import Comment from '#lib/core/interfaces/components/Comment.svelte'
 
 test('Comment', async () => {
 	render(Comment, { name: 'Seline', email: 'seline@test.com', body: 'This is a comment' })
