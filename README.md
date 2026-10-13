@@ -87,17 +87,17 @@ npm run format
 
 ## Running Tests
 
-- TODO: More test cases for unit and integration tests
+- TODO: More test cases for unit, component, andd e2e tests
 
 ```bash
-# run unit and integration/e2e tests with vitest and playwright
-npm run test
-
-# unit test only
+# unit test
 npm run test:unit
 
-# integration test only
-npm run test:integration
+# component test only
+npm run test:component
+
+# e2e test only
+npm run test:e2e
 ```
 
 ## Building

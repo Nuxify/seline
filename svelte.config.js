@@ -1,4 +1,3 @@
-import preprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
@@ -6,10 +5,12 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [
-		vitePreprocess({}),
-		preprocess({ postcss: true, scss: { prependData: '@use "src/app.scss" as *;' } })
-	],
+	preprocess: vitePreprocess({
+		style: true,
+		script: true,
+		scss: { prependData: '@use "src/app.scss" as *;' },
+		postcss: true
+	}),
 	kit: {
 		adapter: adapter({
 			// default options are shown. On some platforms

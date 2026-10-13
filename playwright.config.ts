@@ -1,16 +1,25 @@
-import { type PlaywrightTestConfig, devices } from '@playwright/test'
+import { devices, type PlaywrightTestConfig } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
 	webServer: {
 		command: 'npm run build && npm run preview',
-		port: 5173,
+		port: 4173,
 		reuseExistingServer: true
+	},
+	testDir: 'tests/e2e',
+	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+	fullyParallel: false,
+	reporter: 'html',
+	use: {
+		baseURL: 'http://localhost:4173/',
+		trace: 'on-first-retry'
 	},
 	projects: [
 		{
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'] }
 		},
+
 		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] }
@@ -20,7 +29,6 @@ const config: PlaywrightTestConfig = {
 			name: 'webkit',
 			use: { ...devices['Desktop Safari'] }
 		},
-		/* Test against mobile viewports. */
 		{
 			name: 'Mobile Chrome',
 			use: { ...devices['Pixel 5'] }
@@ -29,14 +37,7 @@ const config: PlaywrightTestConfig = {
 			name: 'Mobile Safari',
 			use: { ...devices['iPhone 12'] }
 		}
-	],
-	use: {
-		launchOptions: {
-			slowMo: 50
-		}
-	},
-	testDir: 'tests/e2e',
-	testMatch: /(.+\.)?(test|spec)\.[jt]s/
+	]
 }
 
 export default config
