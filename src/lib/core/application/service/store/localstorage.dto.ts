@@ -4,5 +4,7 @@ export interface StateDTO {
 }
 
 export enum LsKeys {
-	LAST_KNOWN_MESSAGE = 'lastKnownMessage'
+	LAST_KNOWN_MESSAGE = 'lastKnownMessage',
+	USERS = 'seline.users',
+	SESSION = 'seline.session'
 }

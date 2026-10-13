@@ -3,7 +3,7 @@
 	import { Button } from 'flowbite-svelte'
 	import { getPostCommentsStore } from '$lib/core/application/service/store/social.api.store'
 	import { homeStore } from '$lib/core/module/home/application/service/store/home.store'
-	import { Comment, SEO } from '$components'
+	import { Comment, PostCard, SEO } from '$components'
 
 	/**
 	 * Back to main page

@@ -4,9 +4,12 @@ import type { ISocialRepository } from '$lib/core/domain/repository/social.repos
 import { SocialRepository as SocialRepositoryImpl } from '$lib/core/infrastructures/repository/social.repository'
 import type { ILocalStorageRepository } from '$lib/core/domain/repository/localstorage.repository'
 import { LocalStorageRepository as LocalStorageRepositoryImpl } from '$lib/core/infrastructures/repository/localstorage.repository'
+import type { IAuthRepository } from '$lib/core/domain/repository/auth.repository'
+import { AuthRepository as AuthRepositoryImpl } from '$lib/core/infrastructures/repository/auth.repository'
 
 /// dependency injection
 const $axios = axios.create(AxiosConfig) // base axios
 
 export const SocialRepository: ISocialRepository = new SocialRepositoryImpl($axios)
 export const LocalStorageRepository: ILocalStorageRepository = new LocalStorageRepositoryImpl()
+export const AuthRepository: IAuthRepository = new AuthRepositoryImpl()
