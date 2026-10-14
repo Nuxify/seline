@@ -18,6 +18,7 @@ async function registerUser(
 
 	await page.goto('/register')
 	await page.getByPlaceholder('Enter your name').fill(name)
+	await page.getByRole('button', { name: 'Next' }).click()
 	await page.getByPlaceholder('Enter your email').fill(email)
 	await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 	await page.getByPlaceholder('Confirm your password').fill(PASSWORD)
@@ -34,7 +35,6 @@ test.describe('login', () => {
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 		await page.getByRole('button', { name: 'Log in' }).click()
-
 		await expect(page.getByText('Logged in successfully.')).toBeVisible()
 		await expect(page).toHaveURL('/')
 		await expect(page.getByTestId('session-greeting')).toContainText(name)
@@ -90,13 +90,20 @@ test.describe('login', () => {
 		// register and log in a fresh user for this test
 		await page.goto('/register')
 		await page.getByPlaceholder('Enter your name').fill('Redirect User')
+		await page.getByRole('button', { name: 'Next' }).click()
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 		await page.getByPlaceholder('Confirm your password').fill(PASSWORD)
 		await page.getByRole('button', { name: 'Register' }).click()
+		await expect(page).toHaveURL('/login')
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 		await page.getByRole('button', { name: 'Log in' }).click()
+
+		// add delay to ensure the login process completes and the session is established
+		await page.waitForTimeout(1000)
+
+		await expect(page.getByText('Logged in successfully.')).toBeVisible()
 		await expect(page).toHaveURL('/')
 
 		// visiting /login while authenticated should bounce back home

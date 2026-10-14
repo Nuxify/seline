@@ -11,7 +11,11 @@ test.describe('registration', () => {
 		await page.goto('/register')
 		await expect(page.getByRole('heading', { name: 'Create an account' })).toBeVisible()
 
+		// step 1: name
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
+
+		// step 2: email & password
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill('SuperSecret123')
 		await page.getByPlaceholder('Confirm your password').fill('SuperSecret123')
@@ -25,12 +29,22 @@ test.describe('registration', () => {
 		await expect(page).toHaveURL(/\/login$/)
 	})
 
-	test('shows validation errors for empty form submission', async ({ page }) => {
+	test('shows validation error for empty name on step 1', async ({ page }) => {
 		await page.goto('/register')
+
+		await page.getByRole('button', { name: 'Next' }).click()
+
+		await expect(page.getByTestId('name-error')).toHaveText('Name is required.')
+	})
+
+	test('shows validation errors for empty step 2 submission', async ({ page }) => {
+		await page.goto('/register')
+
+		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
 
 		await page.getByRole('button', { name: 'Register' }).click()
 
-		await expect(page.getByTestId('name-error')).toHaveText('Name is required.')
 		await expect(page.getByTestId('email-error')).toHaveText('Email is required.')
 		await expect(page.getByTestId('password-error')).toHaveText('Password is required.')
 	})
@@ -39,6 +53,8 @@ test.describe('registration', () => {
 		await page.goto('/register')
 
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
+
 		await page.getByPlaceholder('Enter your email').fill('not-an-email')
 		await page.getByPlaceholder('Enter your password').fill('SuperSecret123')
 		await page.getByPlaceholder('Confirm your password').fill('SuperSecret123')
@@ -52,6 +68,8 @@ test.describe('registration', () => {
 		await page.goto('/register')
 
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
+
 		await page.getByPlaceholder('Enter your email').fill(uniqueEmail('mismatch'))
 		await page.getByPlaceholder('Enter your password').fill('SuperSecret123')
 		await page.getByPlaceholder('Confirm your password').fill('DifferentPassword')
@@ -65,6 +83,8 @@ test.describe('registration', () => {
 		await page.goto('/register')
 
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
+
 		await page.getByPlaceholder('Enter your email').fill(uniqueEmail('short'))
 		await page.getByPlaceholder('Enter your password').fill('short')
 		await page.getByPlaceholder('Confirm your password').fill('short')
@@ -76,12 +96,27 @@ test.describe('registration', () => {
 		)
 	})
 
+	test('can navigate back from step 2 to step 1', async ({ page }) => {
+		await page.goto('/register')
+
+		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
+
+		await expect(page.getByPlaceholder('Enter your email')).toBeVisible()
+
+		await page.getByRole('button', { name: 'Back' }).click()
+
+		await expect(page.getByPlaceholder('Enter your name')).toBeVisible()
+		await expect(page.getByPlaceholder('Enter your name')).toHaveValue('Jane Doe')
+	})
+
 	test('prevents registering with a duplicate email', async ({ page }) => {
 		const email = uniqueEmail('duplicate')
 
 		// register once
 		await page.goto('/register')
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill('SuperSecret123')
 		await page.getByPlaceholder('Confirm your password').fill('SuperSecret123')
@@ -91,6 +126,7 @@ test.describe('registration', () => {
 		// attempt to register again with the same email
 		await page.goto('/register')
 		await page.getByPlaceholder('Enter your name').fill('Jane Doe')
+		await page.getByRole('button', { name: 'Next' }).click()
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill('SuperSecret123')
 		await page.getByPlaceholder('Confirm your password').fill('SuperSecret123')
@@ -100,3 +136,4 @@ test.describe('registration', () => {
 		await expect(page).toHaveURL(/\/register$/)
 	})
 })
+

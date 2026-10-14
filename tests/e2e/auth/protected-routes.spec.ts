@@ -18,6 +18,7 @@ test.describe('protected routes', () => {
 
 		await page.goto('/register')
 		await page.getByPlaceholder('Enter your name').fill(name)
+		await page.getByRole('button', { name: 'Next' }).click()
 		await page.getByPlaceholder('Enter your email').fill(email)
 		await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 		await page.getByPlaceholder('Confirm your password').fill(PASSWORD)

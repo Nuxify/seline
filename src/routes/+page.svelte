@@ -28,9 +28,16 @@
 		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
 			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
 				if (createPostState.state.SUCCESS) {
+					let newPost = {
+						id: createPostState.response.data.id,
+						userId: 1,
+						title: title,
+						body: body
+					}
 					title = ''
 					body = ''
 					console.log('New post id:', createPostState.response.data.id)
+					$getPostsStore.response.data = [newPost, ...$getPostsStore.response.data]
 				}
 
 				// show alert prompt
@@ -133,7 +140,7 @@
 						createPost()
 					}}
 				>
-					<span class="lato--font-regular px-4 text-white"> Post </span>
+					<span class="lato--font-regular px-4 text-white">Post</span>
 				</Button>
 			</div>
 		</div>

@@ -13,9 +13,11 @@ test('index page can create a post', async ({ page }) => {
 	// click the "Post" button
 	await page.getByRole('button', { name: 'Post' }).click()
 
+	await expect(page.getByText('Post successfully created.')).toBeVisible()
+
 	// click the first "View Comments" button only (there should be only one)
 	await page.getByRole('button', { name: 'View Comments' }).first().click()
 
 	// check if the comments are visible
-	await expect(page.getByRole('heading', { name: 'Post' })).toBeVisible()
+	await expect(page.getByRole('heading', { name: 'Test Post Title' })).toBeVisible()
 })
