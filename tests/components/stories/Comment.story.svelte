@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Comment from './Comment.svelte'
+	import { Comment } from '$lib/core/interfaces/components'
 
 	let {
 		name = 'Seline',
