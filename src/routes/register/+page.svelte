@@ -39,7 +39,12 @@
 	 * Register user
 	 * @param credentials
 	 */
-	function register(credentials: { name: string; email: string; password: string }): void {
+	function register(credentials: {
+		name: string
+		country: string
+		email: string
+		password: string
+	}): void {
 		authAPI.registerStore.call(credentials)
 	}
 </script>

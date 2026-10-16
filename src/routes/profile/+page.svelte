@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation'
 	import { authAPI } from '$lib/core/application/service/store/auth.api.store'
 	import { SEO } from '$components'
+	import { Countries } from '$lib/internal/types'
 
 	let session: ReturnType<typeof authAPI.getSession> = null
 	let checked = false
@@ -26,6 +27,11 @@
 			<h1 class="mb-6 text-center text-2xl text-primary">Profile</h1>
 			<p class="text-center" data-testid="profile-name">Name: {session.name}</p>
 			<p class="text-center" data-testid="profile-email">Email: {session.email}</p>
+			{#if session.country}
+				<p class="text-center" data-testid="profile-country">
+					Country: {Object.entries(Countries).find(([code]) => code === session?.country)?.[1]}
+				</p>
+			{/if}
 			<a href="/" class="mt-4 text-center text-primary underline">Back home</a>
 		</div>
 	</section>

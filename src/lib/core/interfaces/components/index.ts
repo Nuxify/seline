@@ -1,4 +1,5 @@
 export { default as Comment } from './Comment.svelte'
+export { default as CountryDropdown } from './CountryDropdown.svelte'
 export { default as GlobalAlert } from './GlobalAlert.svelte'
 export { default as Loading } from './Loading.svelte'
 export { default as LoginForm } from './LoginForm.svelte'

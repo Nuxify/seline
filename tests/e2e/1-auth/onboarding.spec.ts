@@ -6,7 +6,7 @@ test.describe('Onboarding', () => {
 	const email = uniqueEmail(name.replace(' ', '.'))
 
 	test('Register', async ({ page }) => {
-		await register(page, email, name)
+		await register(page, email, name, 'FR')
 	})
 
 	test('Login', async ({ page }) => {
@@ -24,11 +24,13 @@ test.describe('Onboarding', () => {
 	})
 
 	test('Profile', async ({ page }) => {
+		await register(page, email, name, 'KO')
 		await login(page, email)
 		await page.getByTestId('profile-link').click()
 
 		await expect(page).toHaveURL(/\/profile$/)
 		await expect(page.getByTestId('profile-name')).toContainText(name)
 		await expect(page.getByTestId('profile-email')).toContainText(email)
+		await expect(page.getByTestId('profile-country')).toHaveText('Country: South Korea')
 	})
 })

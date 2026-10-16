@@ -43,6 +43,7 @@ export class AuthRepository implements IAuthRepository {
 			id: crypto.randomUUID(),
 			name: request.name,
 			email: request.email,
+			country: request.country,
 			password: request.password
 		}
 
@@ -55,7 +56,8 @@ export class AuthRepository implements IAuthRepository {
 			data: {
 				id: newUser.id,
 				name: newUser.name,
-				email: newUser.email
+				email: newUser.email,
+				country: newUser.country
 			}
 		}
 	}
@@ -85,7 +87,8 @@ export class AuthRepository implements IAuthRepository {
 		const session: LoginResponse = {
 			id: user.id,
 			name: user.name,
-			email: user.email
+			email: user.email,
+			country: user.country
 		}
 
 		localStorage.setItem(LsKeys.SESSION, JSON.stringify(session))

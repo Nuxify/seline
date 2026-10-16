@@ -15,12 +15,14 @@ export interface RegisterRequest {
 	name: string
 	email: string
 	password: string
+	country: string
 }
 
 export interface RegisterResponse {
 	id: string
 	name: string
 	email: string
+	country: string
 }
 
 export interface LoginRequest {
@@ -32,4 +34,5 @@ export interface LoginResponse {
 	id: string
 	name: string
 	email: string
+	country: string
 }

@@ -11,12 +11,20 @@ export function uniqueName(): string {
 	return `${faker.person.firstName()} ${faker.person.lastName()}`
 }
 
-export async function registerAndLogin(page: Page, prefix: string): Promise<void> {
+export async function registerAndLogin(page: Page, prefix: string, country = 'PH'): Promise<void> {
 	const email = uniqueEmail(prefix)
 
 	await page.goto('/register')
-	await page.getByPlaceholder('Enter your name').fill(uniqueName())
+	await page.waitForLoadState('networkidle')
+	const name = uniqueName()
+	const nameInput = page.getByPlaceholder('Enter your name')
+	const countrySelect = page.getByRole('combobox', { name: 'Country' })
+	await nameInput.fill(name)
+	await expect(nameInput).toHaveValue(name)
+	await countrySelect.selectOption(country)
+	await expect(countrySelect).toHaveValue(country)
 	await page.getByRole('button', { name: 'Next' }).click()
+	await expect(page.getByPlaceholder('Enter your email')).toBeVisible()
 	await page.getByPlaceholder('Enter your email').fill(email)
 	await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 	await page.getByPlaceholder('Confirm your password').fill(PASSWORD)
@@ -29,10 +37,22 @@ export async function registerAndLogin(page: Page, prefix: string): Promise<void
 	await expect(page).toHaveURL('/')
 }
 
-export async function register(page: Page, email: string, name: string): Promise<void> {
+export async function register(
+	page: Page,
+	email: string,
+	name: string,
+	country = 'PH'
+): Promise<void> {
 	await page.goto('/register')
-	await page.getByPlaceholder('Enter your name').fill(name)
+	await page.waitForLoadState('networkidle')
+	const nameInput = page.getByPlaceholder('Enter your name')
+	const countrySelect = page.getByRole('combobox', { name: 'Country' })
+	await nameInput.fill(name)
+	await expect(nameInput).toHaveValue(name)
+	await countrySelect.selectOption(country)
+	await expect(countrySelect).toHaveValue(country)
 	await page.getByRole('button', { name: 'Next' }).click()
+	await expect(page.getByPlaceholder('Enter your email')).toBeVisible()
 	await page.getByPlaceholder('Enter your email').fill(email)
 	await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 	await page.getByPlaceholder('Confirm your password').fill(PASSWORD)

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CountryDropdown } from '$components'
 	import { Button, Input, Label } from 'flowbite-svelte'
 
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -8,11 +9,17 @@
 		onRegister
 	}: {
 		loading?: boolean
-		onRegister: (credentials: { name: string; email: string; password: string }) => void
+		onRegister: (credentials: {
+			name: string
+			country: string
+			email: string
+			password: string
+		}) => void
 	} = $props()
 
 	let step = $state<1 | 2>(1)
 	let name = $state('')
+	let country = $state('PH')
 	let email = $state('')
 	let password = $state('')
 	let confirmPassword = $state('')
@@ -62,7 +69,7 @@
 		}
 
 		if (Object.keys(errors).length === 0) {
-			onRegister({ name, email, password })
+			onRegister({ name, country, email, password })
 		}
 	}
 </script>
@@ -94,6 +101,10 @@
 					{#if errors.name}
 						<p class="mt-1 text-sm text-error" data-testid="name-error">{errors.name}</p>
 					{/if}
+				</div>
+				<div>
+					<Label for="country" class="mb-1">Country</Label>
+					<CountryDropdown bind:value={country} />
 				</div>
 
 				<Button type="submit" class="mt-2 w-full rounded-full bg-primary">

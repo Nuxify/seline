@@ -8,6 +8,9 @@ test('validates each registration step and submits account details', async ({ mo
 	await expect(component.getByTestId('submitted-credentials')).toHaveValue('')
 
 	await component.getByLabel('Name').fill('Seline')
+	const country = component.getByRole('combobox', { name: 'Country' })
+	await country.selectOption('KO')
+	await expect(country).toHaveValue('KO')
 	await component.getByRole('button', { name: 'Next' }).click()
 
 	await component.getByRole('button', { name: 'Register' }).click()
@@ -30,7 +33,7 @@ test('validates each registration step and submits account details', async ({ mo
 	await component.getByRole('button', { name: 'Register' }).click()
 
 	await expect(component.getByTestId('submitted-credentials')).toHaveValue(
-		'{"name":"Seline","email":"seline@example.com","password":"secure-password"}'
+		'{"name":"Seline","country":"KO","email":"seline@example.com","password":"secure-password"}'
 	)
 })
 
