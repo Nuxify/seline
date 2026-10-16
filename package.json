@@ -15,7 +15,8 @@
 		"test:e2e:headed:chrome": "playwright test --headed --project=chromium",
 		"test:unit": "vitest tests/unit",
 		"test:component": "vitest tests/component",
-		"test:ct": "playwright test --project=components"
+		"test:ct": "playwright test --project=components",
+		"test:component:gallery": "vite --config playwright/vite.config.ts"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.64.0",

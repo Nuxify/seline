@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
+import { registerAndLogin } from '../auth/utils'
 
 test('inputs are cleared after creating post', async ({ page }) => {
+	await registerAndLogin(page, 'social')
 	await page.goto('/')
 
 	// should show heading "Seline: Social Media"

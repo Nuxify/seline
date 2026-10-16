@@ -4,6 +4,9 @@ function uniqueEmail(prefix: string): string {
 	return `${prefix}.${Date.now()}.${Math.floor(Math.random() * 10000)}@example.com`
 }
 
+// TODO: compile steps
+// TODO: add dropdown UI (country select)
+
 test.describe('registration', () => {
 	test('user can register with valid details and is redirected to login', async ({ page }) => {
 		const email = uniqueEmail('register')
@@ -136,4 +139,3 @@ test.describe('registration', () => {
 		await expect(page).toHaveURL(/\/register$/)
 	})
 })
-

@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
+import { registerAndLogin } from './auth/utils'
 
 test('index page can create a post', async ({ page }) => {
+	await registerAndLogin(page, 'home')
 	await page.goto('/')
 	await expect(page.getByRole('heading', { name: 'Seline: Social Media' })).toBeVisible()
 

@@ -128,6 +128,7 @@ test.describe('login', () => {
 		await expect(page).toHaveURL(/\/login$/)
 
 		await page.goto('/')
-		await expect(page.getByTestId('login-link')).toBeVisible()
+		await expect(page).toHaveURL(/\/login$/)
+		await expect(page.getByRole('heading', { name: 'Log in' })).toBeVisible()
 	})
 })

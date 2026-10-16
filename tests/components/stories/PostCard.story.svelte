@@ -1,0 +1,22 @@
+<script lang="ts">
+	import { PostCard } from '$lib/core/interfaces/components'
+	import type { PostResponse } from '$lib/core/application/service/store/social.api.dto'
+
+	const post: PostResponse = {
+		id: 42,
+		userId: 7,
+		title: 'Story post title',
+		body: 'Story post body'
+	}
+
+	let viewedPost = $state('')
+</script>
+
+<PostCard
+	{post}
+	viewComments={(selectedPost) => {
+		viewedPost = JSON.stringify(selectedPost)
+	}}
+/>
+
+<input type="hidden" data-testid="viewed-post" value={viewedPost} />

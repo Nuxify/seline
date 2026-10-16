@@ -7,6 +7,13 @@ function uniqueEmail(prefix: string): string {
 const PASSWORD = 'SuperSecret123'
 
 test.describe('protected routes', () => {
+	test('unauthenticated user visiting / is redirected to /login', async ({ page }) => {
+		await page.goto('/')
+		await page.waitForTimeout(5000) // 1 second delay
+		await expect(page).toHaveURL(/\/login$/)
+		await expect(page.getByRole('heading', { name: 'Log in' })).toBeVisible()
+	})
+
 	test('unauthenticated user visiting /profile is redirected to /login', async ({ page }) => {
 		await page.goto('/profile')
 		await expect(page).toHaveURL(/\/login$/)

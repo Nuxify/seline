@@ -19,11 +19,17 @@
 	let title: string
 	let body: string
 	let session: ReturnType<typeof authAPI.getSession> = null
+	let checked = false
 
 	onMount(async () => {
 		session = authAPI.getSession()
 
-		// watchers or subscribers should be here
+		if (!session) {
+			goto('/login')
+			return
+		}
+
+		checked = true
 
 		const createPostSubscription = socialAPI.createPostStore.subscribe((createPostState) => {
 			if (createPostState.state.SUCCESS || createPostState.state.FAILED) {
@@ -95,62 +101,65 @@
 	}
 </script>
 
-<section>
-	<div class="mx-auto px-4 pt-[30px] xl:container">
-		<div class="flex items-center justify-end gap-4" data-testid="auth-nav">
-			{#if session}
-				<span class="text-sm" data-testid="session-greeting">Hello, {session.name}</span>
-				<a href="/profile" class="text-sm text-primary underline" data-testid="profile-link">
-					Profile
-				</a>
-				<button
-					class="text-sm text-primary underline"
-					data-testid="logout-button"
-					on:click={handleLogout}
-				>
-					Logout
-				</button>
-			{:else}
-				<a href="/login" class="text-sm text-primary underline" data-testid="login-link">Log in</a>
-				<a href="/register" class="text-sm text-primary underline" data-testid="register-link">
-					Register
-				</a>
-			{/if}
-		</div>
-		<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
-		<div class="mx-auto mb-7 mt-12 w-3/4">
-			<h1 class="text-xl text-primary">Create a post</h1>
-			<div class="flex flex-col items-center md:flex-row">
-				<Input
-					bind:value={title}
-					type="text"
-					placeholder="Enter title"
-					class="md:border--radius-l-full mr-5 w-full rounded-full border-none bg-gray-100 !ring-transparent"
-				/>
-				<Input
-					bind:value={body}
-					type="text"
-					placeholder="Enter body"
-					class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
-				/>
-				<Button
-					class="ml-5 w-[100px] rounded-full bg-primary"
-					disabled={$createPostStore.state.LOADING}
-					on:click={() => {
-						createPost()
-					}}
-				>
-					<span class="lato--font-regular px-4 text-white">Post</span>
-				</Button>
+{#if checked && session}
+	<section>
+		<div class="mx-auto px-4 pt-[30px] xl:container">
+			<div class="flex items-center justify-end gap-4" data-testid="auth-nav">
+				{#if session}
+					<span class="text-sm" data-testid="session-greeting">Hello, {session.name}</span>
+					<a href="/profile" class="text-sm text-primary underline" data-testid="profile-link">
+						Profile
+					</a>
+					<button
+						class="text-sm text-primary underline"
+						data-testid="logout-button"
+						on:click={handleLogout}
+					>
+						Logout
+					</button>
+				{:else}
+					<a href="/login" class="text-sm text-primary underline" data-testid="login-link">Log in</a
+					>
+					<a href="/register" class="text-sm text-primary underline" data-testid="register-link">
+						Register
+					</a>
+				{/if}
 			</div>
-		</div>
+			<h1 class="text-center text-2xl text-primary">Seline: Social Media</h1>
+			<div class="mx-auto mb-7 mt-12 w-3/4">
+				<h1 class="text-xl text-primary">Create a post</h1>
+				<div class="flex flex-col items-center md:flex-row">
+					<Input
+						bind:value={title}
+						type="text"
+						placeholder="Enter title"
+						class="md:border--radius-l-full mr-5 w-full rounded-full border-none bg-gray-100 !ring-transparent"
+					/>
+					<Input
+						bind:value={body}
+						type="text"
+						placeholder="Enter body"
+						class="md:border--radius-l-full w-full rounded-full border-none bg-gray-100 !ring-transparent"
+					/>
+					<Button
+						class="ml-5 w-[100px] rounded-full bg-primary"
+						disabled={$createPostStore.state.LOADING}
+						on:click={() => {
+							createPost()
+						}}
+					>
+						<span class="lato--font-regular px-4 text-white">Post</span>
+					</Button>
+				</div>
+			</div>
 
-		<!-- posts list -->
-		{#each $getPostsStore.response.data as post}
-			<PostCard {post} {viewComments} />
-		{/each}
-	</div>
-</section>
+			<!-- posts list -->
+			{#each $getPostsStore.response.data as post}
+				<PostCard {post} {viewComments} />
+			{/each}
+		</div>
+	</section>
+{/if}
 
 <SEO
 	title="Seline - SvelteKit Template"
