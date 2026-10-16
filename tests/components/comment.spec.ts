@@ -14,7 +14,7 @@ test('accepts props and update()', async ({ mount }) => {
 	await expect(component.getByRole('paragraph')).toHaveText('Second')
 })
 
-test('renders an invalid email from story props', async ({ mount }) => {
+test('displays the supplied email without validating it', async ({ mount }) => {
 	const component = await mount('Comment', { email: 'not-an-email' })
 
 	await expect(component.getByRole('heading', { level: 5 })).toHaveText('not-an-email')

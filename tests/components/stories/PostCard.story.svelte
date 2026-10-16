@@ -9,11 +9,17 @@
 		body: 'Story post body'
 	}
 
+	let {
+		showViewButton = true
+	}: {
+		showViewButton?: boolean
+	} = $props()
 	let viewedPost = $state('')
 </script>
 
 <PostCard
 	{post}
+	{showViewButton}
 	viewComments={(selectedPost) => {
 		viewedPost = JSON.stringify(selectedPost)
 	}}

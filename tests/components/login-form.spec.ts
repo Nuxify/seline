@@ -6,6 +6,7 @@ test('validates credentials and submits login details', async ({ mount }) => {
 	await component.getByRole('button', { name: 'Log in' }).click()
 	await expect(component.getByTestId('email-error')).toHaveText('Email is required.')
 	await expect(component.getByTestId('password-error')).toHaveText('Password is required.')
+	await expect(component.getByTestId('submitted-credentials')).toHaveValue('')
 
 	await component.getByLabel('Email').fill('seline@example.com')
 	await component.getByLabel('Password').fill('secure-password')

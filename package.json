@@ -19,6 +19,7 @@
 		"test:component:gallery": "vite --config playwright/vite.config.ts"
 	},
 	"devDependencies": {
+		"@faker-js/faker": "^10.6.0",
 		"@playwright/test": "^1.64.0",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.61.1",

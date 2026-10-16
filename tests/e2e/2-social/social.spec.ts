@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { registerAndLogin } from './auth/utils'
+import { registerAndLogin } from '../1-auth/onboarding-function'
 
 test('index page can create a post', async ({ page }) => {
 	await registerAndLogin(page, 'home')

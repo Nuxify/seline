@@ -5,6 +5,7 @@ test('validates each registration step and submits account details', async ({ mo
 
 	await component.getByRole('button', { name: 'Next' }).click()
 	await expect(component.getByTestId('name-error')).toHaveText('Name is required.')
+	await expect(component.getByTestId('submitted-credentials')).toHaveValue('')
 
 	await component.getByLabel('Name').fill('Seline')
 	await component.getByRole('button', { name: 'Next' }).click()
@@ -12,6 +13,7 @@ test('validates each registration step and submits account details', async ({ mo
 	await component.getByRole('button', { name: 'Register' }).click()
 	await expect(component.getByTestId('email-error')).toHaveText('Email is required.')
 	await expect(component.getByTestId('password-error')).toHaveText('Password is required.')
+	await expect(component.getByTestId('submitted-credentials')).toHaveValue('')
 
 	await component.getByLabel('Password', { exact: true }).fill('short')
 	await component.getByRole('button', { name: 'Register' }).click()
