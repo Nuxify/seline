@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { RegisterForm } from '$lib/core/interfaces/components'
+	import { RegisterForm } from '$lib/core/module/auth/interfaces/components'
 
 	let { loading = false }: { loading?: boolean } = $props()
+
 	let submitted = $state('')
 </script>
 

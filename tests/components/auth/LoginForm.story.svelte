@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { LoginForm } from '$lib/core/interfaces/components'
+	import { LoginForm } from '$lib/core/module/auth/interfaces/components'
 
 	let { loading = false }: { loading?: boolean } = $props()
+
 	let submitted = $state('')
 </script>
 

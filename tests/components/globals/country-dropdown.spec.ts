@@ -1,4 +1,11 @@
 import { expect, test } from '@playwright/test'
+import { Countries } from '$lib/internal/types'
+
+test('renders on mount', async ({ mount }) => {
+	const component = await mount('CountryDropdown')
+
+	await expect(component.getByRole('combobox', { name: 'Country' })).toBeVisible()
+})
 
 test('shows country options and updates the selected country', async ({ mount }) => {
 	const component = await mount('CountryDropdown')
@@ -7,9 +14,7 @@ test('shows country options and updates the selected country', async ({ mount })
 	await expect(country).toHaveValue('PH')
 	await expect(country.locator('option')).toHaveText([
 		'Choose option ...',
-		'Philippines',
-		'France',
-		'South Korea'
+		...Object.values(Countries)
 	])
 
 	await country.selectOption('KO')

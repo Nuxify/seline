@@ -17,12 +17,12 @@ declare global {
 
 const stories = import.meta.glob<StoryModule>([
 	'../../src/**/*.story.svelte',
-	'../../tests/components/stories/**/*.story.svelte',
+	'../../tests/components/**/*.story.svelte',
 	'../../tests/stories/**/*.story.svelte'
 ])
 const id = (f: string) =>
 	f
-		.replace(/^(\.\.\/)+(src|tests\/components\/stories|tests\/stories)\//, '')
+		.replace(/^(\.\.\/)+(src|tests\/components(?:\/[^/]+)*|tests\/stories)\//, '')
 		.replace(/\.story\.svelte$/, '')
 const storyIds = [...new Set(Object.keys(stories).map((file) => id(file)))].sort()
 

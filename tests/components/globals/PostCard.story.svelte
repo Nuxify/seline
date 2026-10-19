@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { PostCard } from '$lib/core/interfaces/components'
 	import type { PostResponse } from '$lib/core/application/service/store/social.api.dto'
+	import { PostCard } from '$lib/core/interfaces/components'
 
 	const post: PostResponse = {
 		id: 42,
