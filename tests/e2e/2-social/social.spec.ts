@@ -1,25 +1,6 @@
-import { expect, test } from '@playwright/test'
-import { registerAndLogin } from '../1-auth/onboarding-function'
+import { test } from '@playwright/test'
+import { createPost } from './social-function'
 
 test('index page can create a post', async ({ page }) => {
-	await registerAndLogin(page, 'home')
-	await page.goto('/')
-	await expect(page.getByRole('heading', { name: 'Seline: Social Media' })).toBeVisible()
-
-	// fill the title input
-	await page.getByPlaceholder('Enter title').fill('Test Post Title')
-
-	// fill the body input
-	await page.getByPlaceholder('Enter body').fill('This is a test post body content')
-
-	// click the "Post" button
-	await page.getByRole('button', { name: 'Post' }).click()
-
-	await expect(page.getByText('Post successfully created.')).toBeVisible()
-
-	// click the first "View Comments" button only (there should be only one)
-	await page.getByRole('button', { name: 'View Comments' }).first().click()
-
-	// check if the comments are visible
-	await expect(page.getByRole('heading', { name: 'Test Post Title' })).toBeVisible()
+	await createPost(page)
 })
