@@ -4,7 +4,8 @@
 	import { authAPI, registerStore } from '$lib/core/application/service/store/auth.api.store'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
-	import { RegisterForm, SEO } from '$components'
+	import { RegisterForm } from '$lib/core/module/auth/interfaces/components'
+	import { SEO } from '$components'
 
 	const subscriptions: Array<() => void> = []
 

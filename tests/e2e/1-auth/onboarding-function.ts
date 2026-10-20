@@ -62,6 +62,7 @@ export async function register(
 
 export async function login(page: Page, email: string): Promise<void> {
 	await page.goto('/login')
+	await expect(page).toHaveURL('/login')
 	await page.getByPlaceholder('Enter your email').fill(email)
 	await page.getByPlaceholder('Enter your password').fill(PASSWORD)
 	await page.getByRole('button', { name: 'Log in' }).click()
@@ -70,6 +71,6 @@ export async function login(page: Page, email: string): Promise<void> {
 
 export async function logout(page: Page): Promise<void> {
 	await page.goto('/')
-	await page.getByRole('button', { name: 'Log out' }).click()
+	await page.getByRole('button', { name: 'Logout' }).click()
 	await expect(page).toHaveURL('/login')
 }

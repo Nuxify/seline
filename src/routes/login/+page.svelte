@@ -4,7 +4,8 @@
 	import { authAPI, loginStore } from '$lib/core/application/service/store/auth.api.store'
 	import { globalStore } from '$lib/core/application/service/store/global.store'
 	import { MessageStatus } from '$lib/core/application/service/store/global.dto'
-	import { LoginForm, SEO } from '$components'
+	import { LoginForm } from '$lib/core/module/auth/interfaces/components'
+	import { SEO } from '$components'
 
 	const subscriptions: Array<() => void> = []
 

@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test'
 import { Countries } from '$lib/internal/types'
 
-const id = Math.random() * 1000
-const userId = Math.random() * 1000
-const title = 'Seline'
+const id = 42
+const userId = 7
+const title = 'Story post title'
+const body = 'Story post body'
 const email = 'seline@test.com'
-const body = 'This is a comment'
 
 test.describe('Comment', () => {
 	test('renders on mount', async ({ mount }) => {
@@ -15,8 +15,8 @@ test.describe('Comment', () => {
 	})
 
 	test('renders comment details', async ({ mount }) => {
-		const component = await mount('Comment')
-		await expect(component.getByRole('heading', { level: 6 })).toContainText(title)
+		const component = await mount('Comment', { name: 'Seline', email, body })
+		await expect(component.getByRole('heading', { level: 6 })).toContainText('Seline')
 		await expect(component.getByRole('heading', { level: 5 })).toHaveText(email)
 		await expect(component.getByRole('paragraph')).toHaveText(body)
 	})

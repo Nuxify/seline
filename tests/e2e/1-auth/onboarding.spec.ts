@@ -10,17 +10,20 @@ test.describe('Onboarding', () => {
 	})
 
 	test('Login', async ({ page }) => {
+		await register(page, email, name, 'FR')
 		await login(page, email)
 	})
 
 	test('Logout', async ({ page }) => {
+		await register(page, email, name, 'KO')
 		await login(page, email)
 		await logout(page)
 	})
 
 	test('Home', async ({ page }) => {
+		await register(page, email, name, 'FR')
 		await login(page, email)
-		await expect(page).toHaveTitle(/Home/)
+		await expect(page).toHaveTitle('Seline - SvelteKit Template')
 	})
 
 	test('Profile', async ({ page }) => {
