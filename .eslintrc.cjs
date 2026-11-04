@@ -29,7 +29,6 @@ module.exports = {
 				ignoreRestSiblings: false
 			}
 		],
-		'@typescript-eslint/member-delimiter-style': 0,
 		'@typescript-eslint/ban-ts-comment': 'error',
 		'@typescript-eslint/explicit-function-return-type': 'off', // disable default
 		'@typescript-eslint/no-explicit-any': 'error'
