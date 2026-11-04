@@ -1,8 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-declare module '*.postcss'
-
 declare namespace App {
 	// interface Error {}
 	// interface Locals {}
@@ -10,3 +8,5 @@ declare namespace App {
 	// interface PageState {}
 	// interface Platform {}
 }
+
+declare module '*.postcss'
