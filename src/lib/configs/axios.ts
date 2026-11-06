@@ -1,6 +1,6 @@
-import { API_URL, ENV } from '$app/env/public'
+import { API_URL, APP_ENV } from '$app/env/public'
 
 export const AxiosConfig = {
 	baseURL: API_URL,
-	debug: ENV !== 'production'
+	debug: APP_ENV !== 'production'
 }
