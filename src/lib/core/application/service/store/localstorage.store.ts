@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
-import { LocalStorageRepository } from '#lib/servicecontainer.js'
-import type { StateDTO, LsKeys } from './localstorage.dto'
+import { LocalStorageRepository } from '#lib/servicecontainer.ts'
+import type { StateDTO, LsKeys } from '#lib/core/application/service/store/localstorage.dto.ts'
 
 const state: StateDTO = {
 	lastKnownKey: '',

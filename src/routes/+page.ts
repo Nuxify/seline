@@ -1,4 +1,4 @@
-import { socialAPI } from '#lib/core/application/service/store/social.api.store.js'
+import { socialAPI } from '#lib/core/application/service/store/social.api.store.ts'
 import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {

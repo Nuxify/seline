@@ -1,4 +1,4 @@
-import type { ILocalStorageRepository } from '#lib/core/domain/repository/localstorage.repository.js'
+import type { ILocalStorageRepository } from '#lib/core/domain/repository/localstorage.repository.ts'
 export class LocalStorageRepository implements ILocalStorageRepository {
 	/**
 	 * Clear local storage

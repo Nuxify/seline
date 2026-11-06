@@ -6,11 +6,11 @@
 		socialAPI,
 		createPostStore,
 		getPostsStore
-	} from '#lib/core/application/service/store/social.api.store.js'
-	import { globalStore } from '#lib/core/application/service/store/global.store.js'
-	import { MessageStatus } from '#lib/core/application/service/store/global.dto.js'
-	import { homeStore } from '#lib/core/module/home/application/service/store/home.store.js'
-	import type { Post } from '#lib/core/module/home/application/service/store/home.dto.js'
+	} from '#lib/core/application/service/store/social.api.store.ts'
+	import { globalStore } from '#lib/core/application/service/store/global.store.ts'
+	import { MessageStatus } from '#lib/core/application/service/store/global.dto.ts'
+	import { homeStore } from '#lib/core/module/home/application/service/store/home.store.ts'
+	import type { Post } from '#lib/core/module/home/application/service/store/home.dto.ts'
 	import { SEO } from '$components'
 
 	const subscriptions: Array<() => void> = []

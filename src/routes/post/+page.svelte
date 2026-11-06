@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { Button } from 'flowbite-svelte'
-	import { getPostCommentsStore } from '#lib/core/application/service/store/social.api.store.js'
-	import { homeStore } from '#lib/core/module/home/application/service/store/home.store.js'
+	import { getPostCommentsStore } from '#lib/core/application/service/store/social.api.store.ts'
+	import { homeStore } from '#lib/core/module/home/application/service/store/home.store.ts'
 	import { Comment, SEO } from '$components'
 
 	/**
