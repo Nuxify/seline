@@ -22,7 +22,7 @@ We encourage to follow the importing style guide below:
 </script>
 ```
 
-> We recommend to use 'alias' path when importing ($lib/).
+> We recommend using the `#lib` subpath import (declared in `package.json`) and including the `.ts` extension.
 
 Example:
 
@@ -46,14 +46,14 @@ Example:
 		deleteCheckpointStore,
 		getCheckpointsStore,
 		updateCheckpointStore
-	} from '$lib/application/service/store/checkpoint.api.store'
-    import type { CheckpointResponse } from '$lib/application/service/store/checkpoint.api.dto'
-    import { globalStore } from '$lib/application/service/store/global.store'
-    import { MessageStatus } from '$lib/application/service/store/global.dto'
-    import { uploadFileStore } from '$lib/application/service/store/media.api.store'
+	} from '#lib/application/service/store/checkpoint.api.store.ts'
+    import type { CheckpointResponse } from '#lib/application/service/store/checkpoint.api.dto.ts'
+    import { globalStore } from '#lib/application/service/store/global.store.ts'
+    import { MessageStatus } from '#lib/application/service/store/global.dto.ts'
+    import { uploadFileStore } from '#lib/application/service/store/media.api.store.ts'
     import { SEO } from '$components'
-    import { locale, t } from '$lib/internal/translations'
-    import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '$lib/internal/utils'
+    import { locale, t } from '#lib/internal/translations.ts'
+    import { convertEpochToTimeAndDate, copyToClipboard, shortenString } from '#lib/internal/utils.ts'
 
     ...
 </script>
@@ -63,7 +63,7 @@ Example:
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-> Migration! SvelteKit 4 requires node >=18.x to work
+> Requires Node >=22 and npm >=11.6.0 (`package.json` `engines`)
 
 ```bash
 # setup environment variables

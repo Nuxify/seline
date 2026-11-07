@@ -1,10 +1,10 @@
-import type { APIResponse } from '$lib/core/domain/models/dto'
+import type { APIResponse } from '#lib/core/domain/models/dto.ts'
 import type {
 	CreatePostRequest,
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from '$lib/core/domain/models/social.dto'
+} from '#lib/core/domain/models/social.dto.ts'
 
 export interface ISocialRepository {
 	/**

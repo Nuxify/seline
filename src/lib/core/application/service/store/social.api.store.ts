@@ -1,18 +1,18 @@
 import { writable } from 'svelte/store'
-import { SocialRepository } from '$lib/servicecontainer'
+import { SocialRepository } from '#lib/servicecontainer.ts'
 import type {
 	CreatePostResponse as ModelCreatePostResponse,
 	CommentResponse as ModelCommentResponse,
 	PostResponse as ModelPostResponse
-} from '$lib/core/domain/models/social.dto'
+} from '#lib/core/domain/models/social.dto.ts'
 import type {
 	StateDTO,
 	CreatePostRequest,
 	CreatePostResponse,
 	CommentResponse,
 	PostResponse
-} from './social.api.dto'
-import { createAPIHandler } from '$lib/internal/api.store'
+} from '#lib/core/application/service/store/social.api.dto.ts'
+import { createAPIHandler } from '#lib/internal/api.store.ts'
 
 const createPostWritable = writable<StateDTO<CreatePostResponse>>({
 	state: {
