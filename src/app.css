@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@plugin 'flowbite/plugin';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-primary: #ee1f70;
+	--color-accent: #979797;
+	--color-secondary: #d89b4b;
+	--color-error: #e92a4a;
+	--color-success: #6ed47c;
+}
+
+@source '../node_modules/flowbite-svelte/dist';
+
+@layer base {
+	.container {
+		margin-inline: auto;
+	}
+
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+}

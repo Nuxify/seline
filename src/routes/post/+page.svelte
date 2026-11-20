@@ -14,27 +14,27 @@
 </script>
 
 <section>
-	<div class="mx-auto mt-[30px] px-4 xl:container">
+	<div class="mx-auto mt-7.5 px-4 xl:container">
 		<Button
-			class="ml-5 w-[100px] rounded-full"
-			on:click={() => {
+			class="ml-5 w-25 rounded-full"
+			onclick={() => {
 				goBack()
 			}}
 		>
-			<span class="lato--font-regular px-4 text-primary"> Back </span>
+			<span class="text-primary px-4"> Back </span>
 		</Button>
-		<h1 class="mt-10 text-center text-2xl text-primary">Post</h1>
+		<h1 class="text-primary mt-10 text-center text-2xl">Post</h1>
 
-		<div class="mb-7rounded-xl mx-auto my-2 w-3/4 rounded-lg border border-primary p-5">
+		<div class="border-primary mx-auto my-2 mb-7 w-3/4 rounded-xl border p-5">
 			<h6>ID: {$homeStore.selectedPost.id}</h6>
 			<h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
 				{$homeStore.selectedPost.title}
 			</h5>
-			<p class="font-normal leading-tight text-gray-700 dark:text-gray-400">
+			<p class="leading-tight font-normal text-gray-700 dark:text-gray-400">
 				{$homeStore.selectedPost.body}
 			</p>
 		</div>
-		<h1 class="mt-10 text-center text-2xl text-primary">Comments</h1>
+		<h1 class="text-primary mt-10 text-center text-2xl">Comments</h1>
 
 		<!-- comments list -->
 		{#each $getPostCommentsStore.response.data as item}
