@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { GlobalAlert } from '$components'
 	import '../app.scss'
-	import '../app.postcss'
+	import '../app.css'
 
 	let { children } = $props()
 </script>

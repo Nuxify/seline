@@ -8,5 +8,3 @@ declare namespace App {
 	// interface PageState {}
 	// interface Platform {}
 }
-
-declare module '*.postcss'

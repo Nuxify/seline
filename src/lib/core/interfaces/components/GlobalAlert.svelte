@@ -5,7 +5,7 @@
 
 {#if $globalStore.showAlert}
 	<Alert
-		class="fixed left-1/2 top-0 z-[99999] w-full -translate-x-1/2 rounded-none text-white {$globalStore.alertVariant}"
+		class="fixed top-0 left-1/2 z-99999 w-full -translate-x-1/2 rounded-none text-white {$globalStore.alertVariant}"
 		dismissable
 	>
 		{$globalStore.alertMessage}
